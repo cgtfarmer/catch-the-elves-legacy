@@ -1,0 +1,12 @@
+1. When you open a page, you get a circle as an avatar. When you click somewhere in the designated area, the avatar goes there.
+	Get this syncing for multiple users via MongoDB
+
+2. Get it working for WASD keylisteners
+
+3. Let them hit spacebar within a certain radius, and it makes the other player turn red
+	Make the redness go away shortly to indicate "dmg taken"
+
+4. Make "attacks" subtract from a health bar green-red, down to 0
+
+5. After 0 health, the circle disappears for all active users, dead user is presented with a respawn button
+
