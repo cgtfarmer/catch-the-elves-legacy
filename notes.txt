@@ -6,10 +6,10 @@
 & get elves starting with random spawn location
 & make it so spacebar can't be held down
 & roll elf colors randomly between blue, black, orange, green, whatever
+& refactor elf motion and fix starting pause
 
-use this thing for elf motion so it doesn't pause at beginning
-	myGameArea.frameNo += 1;
-	if (myGameArea.frameNo == 1 || everyinterval(150)) {
+add a pause button
+
 
 get CSS going so things look nice
 

@@ -195,7 +195,7 @@ function updateGameArea() {
 		return;
 	}
 
-	if(updateCount == 50) {
+	if(myGameArea.frameNumber % 50 == 0 || myGameArea.frameNumber == 0) {
 		for(i = 0; i < elves.length; i++) {
 			var elf = elves[i];
 			elf.speedX = 0;
