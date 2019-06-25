@@ -2,6 +2,8 @@ var player1;
 var gameTimer;
 
 var elves = [];
+var elfColors = ["#000000", "#00ff00", "#0000ff", "#00ffff", "#ffff00", "#ff00ff"];
+
 var updateCount = 0;
 var spaceHasBeenEvaluated = false;
 var time = 0;
@@ -159,10 +161,11 @@ function startGame() {
 
 	var elfWidth = 30;
 	var elfHeight = 30;
-	for(i = 0; i < 5; i++) {
+	for(i = 0; i < 10; i++) {
 		let x = getRndInteger(0, (myGameArea.canvas.width - elfWidth));
 		let y = getRndInteger(0, (myGameArea.canvas.width - elfHeight));
-		elves[i] = new elf(elfWidth, elfHeight, "#000000", x, y);
+		let color = elfColors[getRndInteger(0, elfColors.length)];
+		elves[i] = new elf(elfWidth, elfHeight, color, x, y);
 	}
 
 }
