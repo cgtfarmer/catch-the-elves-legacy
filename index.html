@@ -3,28 +3,38 @@
 <head>
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
-	<title>Page Title</title>
+	<title>Catch the Elves</title>
 	<link rel="stylesheet" href="assets/css/main.css"/>
 </head>
 <body id="page-grid">
 
 	<header id="page-header">
-		<h1>Page Header</h1>
+		<h1>Catch the Elves</h1>
 	</header>
 
 	<section id="page-main">
+		<canvas id="game-canvas">
+		</canvas>
+
 		<div id="start-menu">
 			<button id="easy" type="button" onmousedown="startGame(event, 'easy')">Easy</button>
 			<button id="medium" type="button" onmousedown="startGame(event, 'medium')">Medium</button>
 			<button id="hard" type="button" onmousedown="startGame(event, 'hard')">Hard</button>
 			<button id="insane" type="button" onmousedown="startGame(event, 'insane')">Insane</button>
 		</div>
-
-		<canvas id="game-canvas">
-		</canvas>
 	</section>
 
 	<section id="page-help">
+		<br/>
+		<h3>Instructions:</h3> <p>You are the red square, and the goal is to "catch" all the elves as quickly as possible</p>
+
+		<h3>Controls</h3>
+		<ul>
+			<li><p><strong>Difficulty:</strong> Use the difficulty buttons to select the desired difficulty</p>
+			<li><p><strong>Motion:</strong> Character's movement may be controlled with the arrow keys</p>
+			<li><p><strong>Catching:</strong> The catching action may be performed by pressing the spacebar. The action will only be successful if an elf is within the "square outline" surrounding the player</p>
+		</ul>
+
 	</section>
 
 	<footer id="page-footer">

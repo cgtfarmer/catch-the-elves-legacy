@@ -9,18 +9,16 @@
 & refactor elf motion and fix starting pause
 & Add 3/10 kind of counter
 & get timer converting to minutes/hours?
-
-main menu - easy, medium, hard
+& main menu - easy, medium, hard - just made buttons for now
+& get instructions at bottom
+& get CSS going so things look nice
+& add orange as elf color
+& center player1 on game start
 
 use current settings with 10 elves for "hard mode"?
 	make it faster with 10 elves for "insane"
 
-startGAme is called in HTML
-	call launchStarMenu first instead
-
-get help menu button at bottom
-
-get CSS going so things look nice
+CSS countdown timer or something? Do that interval timeout thing
 
 change name of this project, take old multiplayer notes and move them to the actual multiplayer project
 

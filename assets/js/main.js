@@ -5,7 +5,7 @@ var gameCatchCounter;
 const NUM_ELVES = 10;
 
 var elves = [];
-var elfColors = ["#000000", "#00ff00", "#0000ff", "#00ffff", "#ffff00", "#ff00ff"];
+var elfColors = ["#00ff00", "#0000ff", "#ffff00", "#00ffff", "#ff00ff", "#ff8800"];
 
 var updateCount = 0;
 var spaceHasBeenEvaluated = false;
@@ -22,6 +22,7 @@ var myGameArea = {
         this.canvas.width = 800;
         this.canvas.height = 400;
         this.context = this.canvas.getContext("2d");
+		this.frameNumber = 0;
 		if(this.interval == null) {
 
 			clearInterval(this.interval);
@@ -200,12 +201,12 @@ function catchCounter(fontSize, x, y) {
 
 function startGame(event, difficulty) {
 	event.preventDefault();
-	console.log(event);
-	console.log(difficulty);
+	// console.log(event);
+	// console.log(difficulty);
 
     myGameArea.start(); // disable?
 	$("#game-canvas").show();
-    player1 = new player(30, 30, "#ff0000", 10, 120);
+    player1 = new player(30, 30, "#ff0000", (myGameArea.canvas.width/2), (myGameArea.canvas.height/2));
 
 	let timerFontSize = 28;
 	gameTimer = new timer(timerFontSize, (myGameArea.canvas.width - 190), (timerFontSize + 10));
