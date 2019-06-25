@@ -1,3 +1,11 @@
+& get catching mechanics working as intended
+get n elves generating
+make canvas bigger
+make it so spacebar can't be held down
+
+# =============================================================================
+
+
 1. When you open a page, you get a circle as an avatar. When you click somewhere in the designated area, the avatar goes there.
 	Get this syncing for multiple users via MongoDB
 

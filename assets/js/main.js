@@ -9,13 +9,23 @@ var myGameArea = {
         this.canvas.height = 270;
         this.context = this.canvas.getContext("2d");
         this.interval = setInterval(updateGameArea, 20);
-        window.addEventListener('keydown', function(e) {
+        $("#page-grid").keydown(function(e) {
+			if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+				e.preventDefault();
+			}
             myGameArea.keys = (myGameArea.keys || []);
             myGameArea.keys[e.keyCode] = (e.type == "keydown");
-        })
-        window.addEventListener('keyup', function (e) {
+        });
+        $("#page-grid").keyup(function(e) {
             myGameArea.keys[e.keyCode] = (e.type == "keydown");
-        })
+        });
+        // window.addEventListener('keydown', function(e) {
+            // myGameArea.keys = (myGameArea.keys || []);
+            // myGameArea.keys[e.keyCode] = (e.type == "keydown");
+        // })
+        // window.addEventListener('keyup', function (e) {
+            // myGameArea.keys[e.keyCode] = (e.type == "keydown");
+        // })
     },
     clear : function(){
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -35,6 +45,7 @@ function player(width, height, color, x, y) {
         ctx = myGameArea.context;
         ctx.fillStyle = color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.strokeRect((this.x - 10), (this.y - 10), (this.width + 20), (this.height + 20));
     }
 
     this.updatePosition = function() {
@@ -55,6 +66,22 @@ function player(width, height, color, x, y) {
 		return position;
 	}
 
+	this.attemptCatch = function() {
+		if(elf != null) {
+			if(elf.x >= (this.x - 10) &&
+				elf.y >= (this.y - 10) &&
+				(elf.x + elf.width) <= ((this.x  + this.width) + 10) &&
+				(elf.y + elf.height) <= ((this.y + this.height) + 10)) {
+				elf = null;
+				console.log("Hit");
+			} else {
+				console.log("Miss");
+			}
+		}
+
+		return;
+	}
+
 }
 
 function elf(width, height, color, x, y) {
@@ -73,8 +100,8 @@ function elf(width, height, color, x, y) {
     }
 
     this.updatePosition = function() {
-        this.x += this.speedX;
-        this.y += this.speedY;
+        // this.x += this.speedX;
+        // this.y += this.speedY;
 		this.x = this.handleWrapping(this.x, this.width, myGameArea.canvas.width);
 		this.y = this.handleWrapping(this.y, this.height, myGameArea.canvas.height);
     }
@@ -99,8 +126,9 @@ function elf(width, height, color, x, y) {
 
 function startGame() {
     myGameArea.start();
-    myGamePiece = new player(30, 30, "#000000", 10, 120);
-    elf = new elf(30, 30, "#ff0000", 10, 120);
+    myGamePiece = new player(30, 30, "#ff0000", 10, 120);
+
+    elf = new elf(30, 30, "#000000", 30, 120);
 }
 
 function updateGameArea() {
@@ -111,20 +139,23 @@ function updateGameArea() {
     if(myGameArea.keys && myGameArea.keys[39]) {myGamePiece.speedX = 1; }
     if(myGameArea.keys && myGameArea.keys[38]) {myGamePiece.speedY = -1; }
     if(myGameArea.keys && myGameArea.keys[40]) {myGamePiece.speedY = 1; }
+    if(myGameArea.keys && myGameArea.keys[32]) {myGamePiece.attemptCatch(); }
     myGamePiece.updatePosition();
     myGamePiece.update();
 
-	if(updateCount == 50) {
-		elf.speedX = 0;
-		elf.speedY = 0;
-		elf.speedX = getRndInteger(-3, 3);
-		elf.speedY = getRndInteger(-3, 3);
-		updateCount = 0;
-	}
-	elf.updatePosition();
-	elf.update();
+	if(elf != null) {
+		if(updateCount == 50) {
+			elf.speedX = 0;
+			elf.speedY = 0;
+			elf.speedX = getRndInteger(-3, 3);
+			elf.speedY = getRndInteger(-3, 3);
+			updateCount = 0;
+		}
+		elf.updatePosition();
+		elf.update();
 
-	updateCount++;
+		updateCount++;
+	}
 }
 
 function getRndInteger(min, max) {
