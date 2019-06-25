@@ -1,5 +1,8 @@
 var player1;
 var gameTimer;
+var catchCounter;
+
+const NUM_ELVES = 10;
 
 var elves = [];
 var elfColors = ["#000000", "#00ff00", "#0000ff", "#00ffff", "#ffff00", "#ff00ff"];
@@ -7,6 +10,7 @@ var elfColors = ["#000000", "#00ff00", "#0000ff", "#00ffff", "#ffff00", "#ff00ff
 var updateCount = 0;
 var spaceHasBeenEvaluated = false;
 var time = 0;
+
 var youWinLabel;
 var endTimeLabel;
 
@@ -87,6 +91,7 @@ function player(width, height, color, x, y) {
 				(elf.x + elf.width) <= ((this.x  + this.width) + 10) &&
 				(elf.y + elf.height) <= ((this.y + this.height) + 10)) {
 				elves.splice(i, 1);
+				catchCounter.update();
 			}
 		}
 
@@ -152,6 +157,24 @@ function timer(fontSize, x, y) {
 	return;
 }
 
+function catchCounter(fontSize, x, y) {
+    this.gamearea = myGameArea;
+	this.fontSize = fontSize;
+    this.x = x;
+    this.y = y;
+	this.text = "CAUGHT: " + (NUM_ELVES - elves.length) + "/" + NUM_ELVES;
+
+    this.update = function() {
+		ctx = myGameArea.context;
+		ctx.font = fontSize + "px Arial";
+		ctx.fillStyle = "#000000";
+		this.text = "CAUGHT: " + (NUM_ELVES - elves.length) + "/" + NUM_ELVES;
+		ctx.fillText(this.text, this.x, this.y);
+    }
+
+	return;
+}
+
 function startGame() {
     myGameArea.start();
     player1 = new player(30, 30, "#ff0000", 10, 120);
@@ -159,9 +182,13 @@ function startGame() {
 	let timerFontSize = 28;
 	gameTimer = new timer(timerFontSize, (myGameArea.canvas.width - 190), (timerFontSize + 10));
 
+	let catchCounterFontSize = 20;
+	catchCounter = new catchCounter(catchCounterFontSize, (myGameArea.canvas.width - 190), (catchCounterFontSize + 50));
+	catchCounter.update();
+
 	var elfWidth = 30;
 	var elfHeight = 30;
-	for(i = 0; i < 10; i++) {
+	for(i = 0; i < NUM_ELVES; i++) {
 		let x = getRndInteger(0, (myGameArea.canvas.width - elfWidth));
 		let y = getRndInteger(0, (myGameArea.canvas.width - elfHeight));
 		let color = elfColors[getRndInteger(0, elfColors.length)];
@@ -218,6 +245,7 @@ function updateGameArea() {
 	myGameArea.frameNumber += 1;
 	gameTimer.text = "TIME: " + ((myGameArea.frameNumber*2)/100);
     gameTimer.update();
+    catchCounter.update();
 	// }
 	return;
 }

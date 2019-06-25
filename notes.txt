@@ -7,30 +7,36 @@
 & make it so spacebar can't be held down
 & roll elf colors randomly between blue, black, orange, green, whatever
 & refactor elf motion and fix starting pause
+& Add 3/10 kind of counter
 
-add a pause button
+get timer converting to minutes/hours?
 
+
+main menu - easy, medium, hard
 
 get CSS going so things look nice
 
-
 use current settings with 10 elves for "hard mode"?
-
 
 get starting button
 
 get help menu button at bottom
-consider letting them choose #elves
 
 get replay button on endgame screen
 	actually, get replay button in DOM so they can restart whenever
 
-get timer converting to minutes/hours?
 
 startGAme is called in HTML
 	call launchStarMenu first instead
 
 change name of this project, take old multiplayer notes and move them to the actual multiplayer project
+
+add a pause button?
+consider letting them choose parameters:
+	# of elves
+	speed of them
+	speed of you
+	add/take away from color options (keep it random)
 
 # =============================================================================
 
