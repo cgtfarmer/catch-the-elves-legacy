@@ -67,6 +67,10 @@ function player(width, height, color, x, y) {
         ctx = myGameArea.context;
         ctx.fillStyle = color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
+
+		ctx.strokeStyle = "#000000";
+        ctx.strokeRect(this.x, this.y, this.width, this.height);
+
         ctx.strokeRect((this.x - 10), (this.y - 10), (this.width + 20), (this.height + 20));
     }
 
@@ -119,6 +123,8 @@ function elf(width, height, color, x, y) {
         ctx = myGameArea.context;
         ctx.fillStyle = color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
+		ctx.strokeStyle = "#000000";
+        ctx.strokeRect(this.x, this.y, this.width, this.height);
     }
 
     this.updatePosition = function() {

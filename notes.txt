@@ -14,6 +14,7 @@
 & get CSS going so things look nice
 & add orange as elf color
 & center player1 on game start
+& add border around elves/player to make them easier to see
 
 use current settings with 10 elves for "hard mode"?
 	make it faster with 10 elves for "insane"
