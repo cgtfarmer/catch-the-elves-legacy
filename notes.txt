@@ -1,10 +1,10 @@
 & get catching mechanics working as intended
-get n elves generating
-adapt everything to n elves
-	make sure removal uses arr.splice(spot, 1) so there's no holes in the array
-make canvas bigger
-make it so spacebar can't be held down
+& get n elves generating
+& adapt everything to n elves
+	& make sure removal uses arr.splice(spot, 1) so there's no holes in the array
+& make canvas bigger
 get elves starting with random spawn location
+make it so spacebar can't be held down
 
 # =============================================================================
 

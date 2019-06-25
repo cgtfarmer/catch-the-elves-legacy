@@ -1,24 +1,29 @@
 var player1;
 var elves = [];
 var updateCount = 0;
+var spaceHasBeenEvaluated = false;
+var time = 0;
 
 var myGameArea = {
 	keys : null,
+	frameNumber : 0,
 	canvas : $("#game-canvas")[0], // Notice: [0]
     start : function() {
-        this.canvas.width = 480;
-        this.canvas.height = 270;
+        this.canvas.width = 800;
+        this.canvas.height = 400;
         this.context = this.canvas.getContext("2d");
         this.interval = setInterval(updateGameArea, 20);
         $("#page-grid").keydown(function(e) {
 			if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
 				e.preventDefault();
 			}
+
             myGameArea.keys = (myGameArea.keys || []);
             myGameArea.keys[e.keyCode] = (e.type == "keydown");
         });
         $("#page-grid").keyup(function(e) {
             myGameArea.keys[e.keyCode] = (e.type == "keydown");
+			spaceHasBeenEvaluated = false;
         });
         // window.addEventListener('keydown', function(e) {
             // myGameArea.keys = (myGameArea.keys || []);
@@ -76,9 +81,9 @@ function player(width, height, color, x, y) {
 				(elf.x + elf.width) <= ((this.x  + this.width) + 10) &&
 				(elf.y + elf.height) <= ((this.y + this.height) + 10)) {
 				elves.splice(i, 1);
-				console.log("Hit");
+				// console.log("Hit");
 			} else {
-				console.log("Miss");
+				// console.log("Miss");
 			}
 		}
 
@@ -103,8 +108,8 @@ function elf(width, height, color, x, y) {
     }
 
     this.updatePosition = function() {
-        this.x += this.speedX;
-        this.y += this.speedY;
+        // this.x += this.speedX;
+        // this.y += this.speedY;
 		this.x = this.handleWrapping(this.x, this.width, myGameArea.canvas.width);
 		this.y = this.handleWrapping(this.y, this.height, myGameArea.canvas.height);
     }
@@ -131,8 +136,12 @@ function startGame() {
     myGameArea.start();
     player1 = new player(30, 30, "#ff0000", 10, 120);
 
-	for(i = 0; i < 5; i++) {
-		elves[i] = new elf(30, 30, "#000000", 30, 120);
+	var elfWidth = 30;
+	var elfHeight = 30;
+	for(i = 0; i < 1; i++) {
+		let x = getRndInteger(0, (myGameArea.canvas.width - elfWidth));
+		let y = getRndInteger(0, (myGameArea.canvas.width - elfHeight));
+		elves[i] = new elf(elfWidth, elfHeight, "#000000", x, y);
 	}
 }
 
@@ -140,15 +149,24 @@ function updateGameArea() {
     myGameArea.clear();
     player1.speedX = 0;
     player1.speedY = 0;
-    if(myGameArea.keys && myGameArea.keys[37]) {player1.speedX = -1; }
-    if(myGameArea.keys && myGameArea.keys[39]) {player1.speedX = 1; }
-    if(myGameArea.keys && myGameArea.keys[38]) {player1.speedY = -1; }
-    if(myGameArea.keys && myGameArea.keys[40]) {player1.speedY = 1; }
-    if(myGameArea.keys && myGameArea.keys[32]) {player1.attemptCatch(); }
+    if(myGameArea.keys && myGameArea.keys[37]) {player1.speedX = -2; }
+    if(myGameArea.keys && myGameArea.keys[39]) {player1.speedX = 2; }
+    if(myGameArea.keys && myGameArea.keys[38]) {player1.speedY = -2; }
+    if(myGameArea.keys && myGameArea.keys[40]) {player1.speedY = 2; }
+    if(myGameArea.keys && myGameArea.keys[32]) {
+		if(!spaceHasBeenEvaluated) {
+			// console.log("Attempting catch");
+			player1.attemptCatch();
+			spaceHasBeenEvaluated = true;
+		} else {
+			// console.log("Not attempting catch");
+		}
+	}
     player1.updatePosition();
     player1.update();
 
 	if(elves.length < 1) {
+		launchEnd();
 		return;
 	}
 
@@ -157,8 +175,8 @@ function updateGameArea() {
 			var elf = elves[i];
 			elf.speedX = 0;
 			elf.speedY = 0;
-			elf.speedX = getRndInteger(-3, 3);
-			elf.speedY = getRndInteger(-3, 3);
+			elf.speedX = getRndInteger(-5, 5);
+			elf.speedY = getRndInteger(-5, 5);
 		}
 		updateCount = 0;
 	}
@@ -170,6 +188,19 @@ function updateGameArea() {
 	}
 
 	updateCount++;
+	return;
+}
+
+function launchEnd() {
+	myGameArea.clear();
+	ctx = myGameArea.context;
+
+	ctx.font = "56px Arial";
+	ctx.fillStyle = "#000000";
+	ctx.textAlign = "center";
+	ctx.fillText("You Win!", myGameArea.canvas.width/2, myGameArea.canvas.height/2);
+
+	ctx.fillText("Time: " + "", myGameArea.canvas.width/2, (myGameArea.canvas.height/2) + 75);
 	return;
 }
 
