@@ -1,0 +1,35 @@
+{
+	"title" : "Catch the Elves", 
+	"date" : "2019-06", 
+	"revenue" : "No", 
+	"status" : "Complete", 
+	"summary" : "This is a single-player game where the objective is to catch all the 'elves' running around on the screen as quickly as possible",
+	"description" : "The game components are rendered using the HTML canvas element and JavaScript", 
+	"future-work" : [
+						"Consider adding a pause menu",
+						"Consider adding a main menu inside the canvas",
+						"Consider adding functionality to enable play on mobile",
+						"Consider adding functionality to store high scores",
+						"Consider adding functionality to share a high score on social media"
+				    ],
+	"live-link" : "http://software.christianfarmer.org/catch-the-elves", 
+	"demonstration-link" : "Contact me", 
+	"repository-link" : "Contact me", 
+	"supported-platforms" : ["Windows", "MacOS", "Linux"],
+	"supported-browsers" : ["Mozilla Firefox"], 
+	"version-control" : "Git", 
+	"development-methods" : "Agile", 
+	"team-size" : "1", 
+	"lines-of-code" : "0", 
+	"user-interface" : "Web", 
+	"keywords" : ["Games", "UI/UX"], 
+	"languages" : ["HTML", "CSS", "JavaScript"],
+	"libraries" : [
+					"JavaScript: jQuery"
+				  ],
+	"external-programs" : "None", 
+	"development-os" : "Linux: Arch", 
+	"deployment-os" : "Linux: Debian", 
+	"web-server" : "Apache", 
+	"databases" : ["None"]
+}

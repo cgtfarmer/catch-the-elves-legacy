@@ -15,13 +15,13 @@
 & add orange as elf color
 & center player1 on game start
 & add border around elves/player to make them easier to see
+& change name of this project, take old multiplayer notes and move them to the actual multiplayer project
 
 use current settings with 10 elves for "hard mode"?
 	make it faster with 10 elves for "insane"
 
 CSS countdown timer or something? Do that interval timeout thing
 
-change name of this project, take old multiplayer notes and move them to the actual multiplayer project
 
 
 # Optional
@@ -40,18 +40,4 @@ consider letting them choose parameters:
 	speed of you
 	add/take away from color options (keep it random)
 
-# =============================================================================
-
-
-1. When you open a page, you get a circle as an avatar. When you click somewhere in the designated area, the avatar goes there.
-	Get this syncing for multiple users via MongoDB
-
-2. Get it working for WASD keylisteners
-
-3. Let them hit spacebar within a certain radius, and it makes the other player turn red
-	Make the redness go away shortly to indicate "dmg taken"
-
-4. Make "attacks" subtract from a health bar green-red, down to 0
-
-5. After 0 health, the circle disappears for all active users, dead user is presented with a respawn button
 
