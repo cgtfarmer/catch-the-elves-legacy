@@ -1,8 +1,12 @@
 var player1;
+var gameTimer;
+
 var elves = [];
 var updateCount = 0;
 var spaceHasBeenEvaluated = false;
 var time = 0;
+var youWinLabel;
+var endTimeLabel;
 
 var myGameArea = {
 	keys : null,
@@ -81,9 +85,6 @@ function player(width, height, color, x, y) {
 				(elf.x + elf.width) <= ((this.x  + this.width) + 10) &&
 				(elf.y + elf.height) <= ((this.y + this.height) + 10)) {
 				elves.splice(i, 1);
-				// console.log("Hit");
-			} else {
-				// console.log("Miss");
 			}
 		}
 
@@ -108,8 +109,8 @@ function elf(width, height, color, x, y) {
     }
 
     this.updatePosition = function() {
-        // this.x += this.speedX;
-        // this.y += this.speedY;
+        this.x += this.speedX;
+        this.y += this.speedY;
 		this.x = this.handleWrapping(this.x, this.width, myGameArea.canvas.width);
 		this.y = this.handleWrapping(this.y, this.height, myGameArea.canvas.height);
     }
@@ -132,17 +133,38 @@ function elf(width, height, color, x, y) {
 
 }
 
+function timer(fontSize, x, y) {
+    this.gamearea = myGameArea;
+	this.fontSize = fontSize;
+    this.x = x;
+    this.y = y;
+	this.time = "TIME: 0";
+
+    this.update = function() {
+		ctx = myGameArea.context;
+		ctx.font = fontSize + "px Arial";
+		ctx.fillStyle = "#000000";
+		ctx.fillText(this.text, this.x, this.y);
+    }
+
+	return;
+}
+
 function startGame() {
     myGameArea.start();
     player1 = new player(30, 30, "#ff0000", 10, 120);
 
+	let timerFontSize = 28;
+	gameTimer = new timer(timerFontSize, (myGameArea.canvas.width - 190), (timerFontSize + 10));
+
 	var elfWidth = 30;
 	var elfHeight = 30;
-	for(i = 0; i < 1; i++) {
+	for(i = 0; i < 5; i++) {
 		let x = getRndInteger(0, (myGameArea.canvas.width - elfWidth));
 		let y = getRndInteger(0, (myGameArea.canvas.width - elfHeight));
 		elves[i] = new elf(elfWidth, elfHeight, "#000000", x, y);
 	}
+
 }
 
 function updateGameArea() {
@@ -166,7 +188,7 @@ function updateGameArea() {
     player1.update();
 
 	if(elves.length < 1) {
-		launchEnd();
+		endGame();
 		return;
 	}
 
@@ -188,19 +210,39 @@ function updateGameArea() {
 	}
 
 	updateCount++;
+
+	// if(myGameArea.frameNo == 1 || everyinterval(150)) {
+	myGameArea.frameNumber += 1;
+	gameTimer.text = "TIME: " + ((myGameArea.frameNumber*2)/100);
+    gameTimer.update();
+	// }
 	return;
 }
 
-function launchEnd() {
+function label(text, fontSize, x, y) {
+	this.text = text;
+	this.fontSize = fontSize;
+	this.x = x;
+	this.y = y;
+
+    this.update = function() {
+		ctx = myGameArea.context;
+		ctx.font = this.fontSize + "px Arial";
+		ctx.fillStyle = "#000000";
+		ctx.textAlign = "center";
+		ctx.fillText(this.text, this.x, this.y);
+    }
+
+}
+
+function endGame() {
 	myGameArea.clear();
-	ctx = myGameArea.context;
 
-	ctx.font = "56px Arial";
-	ctx.fillStyle = "#000000";
-	ctx.textAlign = "center";
-	ctx.fillText("You Win!", myGameArea.canvas.width/2, myGameArea.canvas.height/2);
+	youWinLabel = new label("You Win!", 108, myGameArea.canvas.width/2, (myGameArea.canvas.height/2) - 20);
+	endTimeLabel = new label("Time: " + ((myGameArea.frameNumber*2)/100) + " seconds", 36, myGameArea.canvas.width/2, (myGameArea.canvas.height/2) + 55);
 
-	ctx.fillText("Time: " + "", myGameArea.canvas.width/2, (myGameArea.canvas.height/2) + 75);
+	youWinLabel.update();
+	endTimeLabel.update();
 	return;
 }
 

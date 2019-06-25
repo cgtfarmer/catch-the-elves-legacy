@@ -6,6 +6,16 @@
 get elves starting with random spawn location
 make it so spacebar can't be held down
 
+use this thing for elf motion so it doesn't pause at beginning
+	myGameArea.frameNo += 1;
+	if (myGameArea.frameNo == 1 || everyinterval(150)) {
+
+roll elf colors randomly between blue, black, orange, green, whatever
+
+get starting button
+get help menu button at bottom
+consider letting them choose #elves
+
 # =============================================================================
 
 
