@@ -1,5 +1,5 @@
 var myGamePiece;
-var elf;
+var elves = [];
 var updateCount = 0;
 
 var myGameArea = {
@@ -100,8 +100,8 @@ function elf(width, height, color, x, y) {
     }
 
     this.updatePosition = function() {
-        // this.x += this.speedX;
-        // this.y += this.speedY;
+        this.x += this.speedX;
+        this.y += this.speedY;
 		this.x = this.handleWrapping(this.x, this.width, myGameArea.canvas.width);
 		this.y = this.handleWrapping(this.y, this.height, myGameArea.canvas.height);
     }
@@ -128,7 +128,9 @@ function startGame() {
     myGameArea.start();
     myGamePiece = new player(30, 30, "#ff0000", 10, 120);
 
-    elf = new elf(30, 30, "#000000", 30, 120);
+	for(i = 0; i < 5; i++) {
+		elves[i] = new elf(30, 30, "#000000", 30, 120);
+	}
 }
 
 function updateGameArea() {
@@ -143,22 +145,32 @@ function updateGameArea() {
     myGamePiece.updatePosition();
     myGamePiece.update();
 
-	if(elf != null) {
-		if(updateCount == 50) {
+	if(elves.length < 1) {
+		return;
+	}
+
+	if(updateCount == 50) {
+		for(i = 0; i < elves.length; i++) {
+			var elf = elves[i];
 			elf.speedX = 0;
 			elf.speedY = 0;
 			elf.speedX = getRndInteger(-3, 3);
 			elf.speedY = getRndInteger(-3, 3);
-			updateCount = 0;
 		}
+		updateCount = 0;
+	}
+
+	for(i = 0; i < elves.length; i++) {
+		var elf = elves[i];
 		elf.updatePosition();
 		elf.update();
-
-		updateCount++;
 	}
+
+	updateCount++;
+	return;
 }
 
 function getRndInteger(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) ) + min;
+	return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
