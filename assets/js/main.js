@@ -1,8 +1,9 @@
-var myGamePiece;
+var player1;
 var elves = [];
 var updateCount = 0;
 
 var myGameArea = {
+	keys : null,
 	canvas : $("#game-canvas")[0], // Notice: [0]
     start : function() {
         this.canvas.width = 480;
@@ -67,12 +68,14 @@ function player(width, height, color, x, y) {
 	}
 
 	this.attemptCatch = function() {
-		if(elf != null) {
+		for(i = 0; i < elves.length; i++) {
+			var elf = elves[i];
+
 			if(elf.x >= (this.x - 10) &&
 				elf.y >= (this.y - 10) &&
 				(elf.x + elf.width) <= ((this.x  + this.width) + 10) &&
 				(elf.y + elf.height) <= ((this.y + this.height) + 10)) {
-				elf = null;
+				elves.splice(i, 1);
 				console.log("Hit");
 			} else {
 				console.log("Miss");
@@ -126,7 +129,7 @@ function elf(width, height, color, x, y) {
 
 function startGame() {
     myGameArea.start();
-    myGamePiece = new player(30, 30, "#ff0000", 10, 120);
+    player1 = new player(30, 30, "#ff0000", 10, 120);
 
 	for(i = 0; i < 5; i++) {
 		elves[i] = new elf(30, 30, "#000000", 30, 120);
@@ -135,15 +138,15 @@ function startGame() {
 
 function updateGameArea() {
     myGameArea.clear();
-    myGamePiece.speedX = 0;
-    myGamePiece.speedY = 0;
-    if(myGameArea.keys && myGameArea.keys[37]) {myGamePiece.speedX = -1; }
-    if(myGameArea.keys && myGameArea.keys[39]) {myGamePiece.speedX = 1; }
-    if(myGameArea.keys && myGameArea.keys[38]) {myGamePiece.speedY = -1; }
-    if(myGameArea.keys && myGameArea.keys[40]) {myGamePiece.speedY = 1; }
-    if(myGameArea.keys && myGameArea.keys[32]) {myGamePiece.attemptCatch(); }
-    myGamePiece.updatePosition();
-    myGamePiece.update();
+    player1.speedX = 0;
+    player1.speedY = 0;
+    if(myGameArea.keys && myGameArea.keys[37]) {player1.speedX = -1; }
+    if(myGameArea.keys && myGameArea.keys[39]) {player1.speedX = 1; }
+    if(myGameArea.keys && myGameArea.keys[38]) {player1.speedY = -1; }
+    if(myGameArea.keys && myGameArea.keys[40]) {player1.speedY = 1; }
+    if(myGameArea.keys && myGameArea.keys[32]) {player1.attemptCatch(); }
+    player1.updatePosition();
+    player1.update();
 
 	if(elves.length < 1) {
 		return;
