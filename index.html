@@ -6,7 +6,7 @@
 	<title>Page Title</title>
 	<link rel="stylesheet" href="assets/css/main.css"/>
 </head>
-<body id="page-grid" onload="startGame()">
+<body id="page-grid">
 
 	<header id="page-header">
 		<h1>Page Header</h1>
@@ -14,11 +14,12 @@
 
 	<section id="page-main">
 		<div id="start-menu">
-			<button id="easy">Easy</button>
-			<button id="medium">Medium</button>
-			<button id="hard">Hard</button>
-			<button id="insane">Insane</button>
+			<button id="easy" type="button" onmousedown="startGame(event, 'easy')">Easy</button>
+			<button id="medium" type="button" onmousedown="startGame(event, 'medium')">Medium</button>
+			<button id="hard" type="button" onmousedown="startGame(event, 'hard')">Hard</button>
+			<button id="insane" type="button" onmousedown="startGame(event, 'insane')">Insane</button>
 		</div>
+
 		<canvas id="game-canvas">
 		</canvas>
 	</section>

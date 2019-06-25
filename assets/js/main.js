@@ -1,6 +1,6 @@
 var player1;
 var gameTimer;
-var catchCounter;
+var gameCatchCounter;
 
 const NUM_ELVES = 10;
 
@@ -22,19 +22,24 @@ var myGameArea = {
         this.canvas.width = 800;
         this.canvas.height = 400;
         this.context = this.canvas.getContext("2d");
-        this.interval = setInterval(updateGameArea, 20);
-        $("#page-grid").keydown(function(e) {
-			if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-				e.preventDefault();
-			}
+		if(this.interval == null) {
 
-            myGameArea.keys = (myGameArea.keys || []);
-            myGameArea.keys[e.keyCode] = (e.type == "keydown");
-        });
-        $("#page-grid").keyup(function(e) {
-            myGameArea.keys[e.keyCode] = (e.type == "keydown");
-			spaceHasBeenEvaluated = false;
-        });
+			clearInterval(this.interval);
+			this.interval = setInterval(updateGameArea, 20);
+			$("#page-grid").keydown(function(e) {
+				if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+					e.preventDefault();
+				}
+
+				myGameArea.keys = (myGameArea.keys || []);
+				myGameArea.keys[e.keyCode] = (e.type == "keydown");
+			});
+			$("#page-grid").keyup(function(e) {
+				myGameArea.keys[e.keyCode] = (e.type == "keydown");
+				spaceHasBeenEvaluated = false;
+			});
+
+		}
         // window.addEventListener('keydown', function(e) {
             // myGameArea.keys = (myGameArea.keys || []);
             // myGameArea.keys[e.keyCode] = (e.type == "keydown");
@@ -91,7 +96,7 @@ function player(width, height, color, x, y) {
 				(elf.x + elf.width) <= ((this.x  + this.width) + 10) &&
 				(elf.y + elf.height) <= ((this.y + this.height) + 10)) {
 				elves.splice(i, 1);
-				catchCounter.update();
+				gameCatchCounter.update();
 			}
 		}
 
@@ -193,31 +198,21 @@ function catchCounter(fontSize, x, y) {
 	return;
 }
 
-function launchMainMenu() {
-    myGameArea.start();
-	myGameArea.clear();
+function startGame(event, difficulty) {
+	event.preventDefault();
+	console.log(event);
+	console.log(difficulty);
 
-	easyLabel = new label("You Win!", 108, myGameArea.canvas.width/2, (myGameArea.canvas.height/2) - 20);
-
-
-	youWinLabel.update();
-	endTimeLabel.update();
-	return;
-}
-
-	return;
-}
-
-function startGame() {
-    // myGameArea.start(); // disable?
+    myGameArea.start(); // disable?
+	$("#game-canvas").show();
     player1 = new player(30, 30, "#ff0000", 10, 120);
 
 	let timerFontSize = 28;
 	gameTimer = new timer(timerFontSize, (myGameArea.canvas.width - 190), (timerFontSize + 10));
 
 	let catchCounterFontSize = 20;
-	catchCounter = new catchCounter(catchCounterFontSize, (myGameArea.canvas.width - 190), (catchCounterFontSize + 50));
-	catchCounter.update();
+	gameCatchCounter = new catchCounter(catchCounterFontSize, (myGameArea.canvas.width - 190), (catchCounterFontSize + 50));
+	gameCatchCounter.update();
 
 	var elfWidth = 30;
 	var elfHeight = 30;
@@ -277,7 +272,7 @@ function updateGameArea() {
 	// if(myGameArea.frameNo == 1 || everyinterval(150)) {
 	myGameArea.frameNumber += 1;
     gameTimer.update();
-    catchCounter.update();
+    gameCatchCounter.update();
 	// }
 	return;
 }
