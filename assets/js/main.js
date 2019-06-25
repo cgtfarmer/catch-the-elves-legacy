@@ -15,7 +15,7 @@ var youWinLabel;
 var endTimeLabel;
 
 var myGameArea = {
-	keys : null,
+	keys : [],
 	frameNumber : 0,
 	canvas : $("#game-canvas")[0], // Notice: [0]
     start : function() {
@@ -145,12 +145,30 @@ function timer(fontSize, x, y) {
 	this.fontSize = fontSize;
     this.x = x;
     this.y = y;
-	this.time = "TIME: 0";
+	this.text = "TIME: 0";
+	this.centiseconds = 0;
+	this.seconds = 0;
+	this.minutes = 0;
 
     this.update = function() {
 		ctx = myGameArea.context;
 		ctx.font = fontSize + "px Arial";
 		ctx.fillStyle = "#000000";
+
+		let clock = (myGameArea.frameNumber*2);
+		this.centiseconds = clock % 100;
+
+		if(clock % 100 == 0) {
+			this.centiseconds = 0;
+			this.seconds++;
+		}
+
+		if(this.seconds >= 60) {
+			this.seconds = 0;
+			this.minutes++;
+		}
+
+		this.text = "TIME: " + this.minutes + ":" + this.seconds + ":" + this.centiseconds;
 		ctx.fillText(this.text, this.x, this.y);
     }
 
@@ -175,8 +193,23 @@ function catchCounter(fontSize, x, y) {
 	return;
 }
 
-function startGame() {
+function launchMainMenu() {
     myGameArea.start();
+	myGameArea.clear();
+
+	easyLabel = new label("You Win!", 108, myGameArea.canvas.width/2, (myGameArea.canvas.height/2) - 20);
+
+
+	youWinLabel.update();
+	endTimeLabel.update();
+	return;
+}
+
+	return;
+}
+
+function startGame() {
+    // myGameArea.start(); // disable?
     player1 = new player(30, 30, "#ff0000", 10, 120);
 
 	let timerFontSize = 28;
@@ -243,7 +276,6 @@ function updateGameArea() {
 
 	// if(myGameArea.frameNo == 1 || everyinterval(150)) {
 	myGameArea.frameNumber += 1;
-	gameTimer.text = "TIME: " + ((myGameArea.frameNumber*2)/100);
     gameTimer.update();
     catchCounter.update();
 	// }
@@ -270,7 +302,7 @@ function endGame() {
 	myGameArea.clear();
 
 	youWinLabel = new label("You Win!", 108, myGameArea.canvas.width/2, (myGameArea.canvas.height/2) - 20);
-	endTimeLabel = new label("Time: " + ((myGameArea.frameNumber*2)/100) + " seconds", 36, myGameArea.canvas.width/2, (myGameArea.canvas.height/2) + 55);
+	endTimeLabel = new label("Time: " + gameTimer.minutes + ":" + gameTimer.seconds + ":" + gameTimer.centiseconds, 36, myGameArea.canvas.width/2, (myGameArea.canvas.height/2) + 55);
 
 	youWinLabel.update();
 	endTimeLabel.update();
@@ -279,5 +311,13 @@ function endGame() {
 
 function getRndInteger(min, max) {
 	return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+function convertSecondsToTimeStr(hundredthSeconds) {
+	// console.log(hundredthSeconds);
+	let seconds = hundredthSeconds/100;
+
+	let minutes = Math.floor(seconds/60);
+	return minutes + ":" + seconds;
 }
 
