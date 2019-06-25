@@ -3,8 +3,8 @@
 & adapt everything to n elves
 	& make sure removal uses arr.splice(spot, 1) so there's no holes in the array
 & make canvas bigger
-get elves starting with random spawn location
-make it so spacebar can't be held down
+& get elves starting with random spawn location
+& make it so spacebar can't be held down
 
 use this thing for elf motion so it doesn't pause at beginning
 	myGameArea.frameNo += 1;
@@ -13,8 +13,17 @@ use this thing for elf motion so it doesn't pause at beginning
 roll elf colors randomly between blue, black, orange, green, whatever
 
 get starting button
+
 get help menu button at bottom
 consider letting them choose #elves
+
+get replay button on endgame screen
+	actually, get replay button in DOM so they can restart whenever
+
+get timer converting to minutes/hours?
+
+startGAme is called in HTML
+	call launchStarMenu first instead
 
 # =============================================================================
 
