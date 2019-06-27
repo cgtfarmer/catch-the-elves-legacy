@@ -6,13 +6,15 @@ var elfSpeeds = { easy : 1,
 				  medium : 2,
 				  hard : 5,
 				  insane : 7,
-				  impossible : 11 }
+				  legendary : 11,
+				  impossible : 15 }
 
 var directionChangeRate = { easy : 150,
 							medium : 100,
 							hard : 50,
 							insane : 25,
-							impossible : 15 }
+							legendary : 15,
+							impossible : 10 }
 
 var gameDifficulty;
 
