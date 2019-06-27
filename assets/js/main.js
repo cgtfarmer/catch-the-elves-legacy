@@ -2,6 +2,20 @@ var player1;
 var gameTimer;
 var gameCatchCounter;
 
+var elfSpeeds = { easy : 1,
+				  medium : 2,
+				  hard : 5,
+				  insane : 7,
+				  impossible : 11 }
+
+var directionChangeRate = { easy : 150,
+							medium : 100,
+							hard : 50,
+							insane : 25,
+							impossible : 15 }
+
+var gameDifficulty;
+
 const NUM_ELVES = 10;
 
 var elves = [];
@@ -58,6 +72,7 @@ function player(width, height, color, x, y) {
     this.gamearea = myGameArea;
     this.width = width;
     this.height = height;
+	this.color = color;
     this.speedX = 0;
     this.speedY = 0;
     this.x = x;
@@ -65,7 +80,7 @@ function player(width, height, color, x, y) {
 
     this.update = function() {
         ctx = myGameArea.context;
-        ctx.fillStyle = color;
+        ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
 
 		ctx.strokeStyle = "#000000";
@@ -114,6 +129,7 @@ function elf(width, height, color, x, y) {
     this.gamearea = myGameArea;
     this.width = width;
     this.height = height;
+	this.color = color;
     this.speedX = 0;
     this.speedY = 0;
     this.x = x;
@@ -121,7 +137,7 @@ function elf(width, height, color, x, y) {
 
     this.update = function() {
         ctx = myGameArea.context;
-        ctx.fillStyle = color;
+        ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
 		ctx.strokeStyle = "#000000";
         ctx.strokeRect(this.x, this.y, this.width, this.height);
@@ -207,6 +223,7 @@ function catchCounter(fontSize, x, y) {
 
 function startGame(event, difficulty) {
 	event.preventDefault();
+	gameDifficulty = difficulty;
 	// console.log(event);
 	// console.log(difficulty);
 
@@ -257,13 +274,16 @@ function updateGameArea() {
 		return;
 	}
 
-	if(myGameArea.frameNumber % 50 == 0 || myGameArea.frameNumber == 0) {
+	if(myGameArea.frameNumber % directionChangeRate[gameDifficulty] == 0 || myGameArea.frameNumber == 0) {
 		for(i = 0; i < elves.length; i++) {
 			var elf = elves[i];
 			elf.speedX = 0;
 			elf.speedY = 0;
-			elf.speedX = getRndInteger(-5, 5);
-			elf.speedY = getRndInteger(-5, 5);
+			// elf.speedX = getRndInteger((elfSpeeds["hard"]*-1), elfSpeeds["hard"]);
+			 elf.speedX = getRndInteger((elfSpeeds[gameDifficulty]*-1),
+										elfSpeeds[gameDifficulty]);
+			 elf.speedY = getRndInteger((elfSpeeds[gameDifficulty]*-1),
+									    elfSpeeds[gameDifficulty]);
 		}
 		updateCount = 0;
 	}
