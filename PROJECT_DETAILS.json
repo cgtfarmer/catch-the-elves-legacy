@@ -20,7 +20,7 @@
 	"version-control" : "Git", 
 	"development-methods" : "Agile", 
 	"team-size" : "1", 
-	"lines-of-code" : "0", 
+	"lines-of-code" : "487", 
 	"user-interface" : "Web", 
 	"keywords" : ["Games", "UI/UX"], 
 	"languages" : ["HTML", "CSS", "JavaScript"],
