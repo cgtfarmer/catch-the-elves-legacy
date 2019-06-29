@@ -12,7 +12,7 @@
 						"Consider adding functionality to store high scores",
 						"Consider adding functionality to share a high score on social media"
 				    ],
-	"live-link" : "http://software.christianfarmer.org/catch-the-elves", 
+	"live-link" : "http://projects.christianfarmer.org/software/games/catch-the-elves", 
 	"demonstration-link" : "Contact me", 
 	"repository-link" : "Contact me", 
 	"supported-platforms" : ["Windows", "MacOS", "Linux"],
