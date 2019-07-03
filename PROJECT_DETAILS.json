@@ -15,7 +15,7 @@
 	"live-link" : "http://projects.christianfarmer.org/software/games/catch-the-elves", 
 	"demonstration-link" : "Contact me", 
 	"repository-link" : "Contact me", 
-	"supported-platforms" : ["Windows", "MacOS", "Linux"],
+	"supported-platforms" : ["Windows", "macOS", "Linux"],
 	"supported-browsers" : ["Mozilla Firefox"], 
 	"version-control" : "Git", 
 	"development-methods" : "Agile", 
