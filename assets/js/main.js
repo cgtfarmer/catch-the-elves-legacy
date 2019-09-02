@@ -2,6 +2,9 @@ var player1;
 var gameTimer;
 var gameCatchCounter;
 
+spriteSheet = new Image();
+spriteSheet.src = "assets/images/spriteSheet.png";
+
 var elfSpeeds = { easy : 1,
 				  medium : 2,
 				  hard : 5,
@@ -136,12 +139,10 @@ function elf(width, height, color, x, y) {
     this.speedY = 0;
     this.x = x;
     this.y = y;
-	this.img = new Image();
-	this.img.src = "assets/images/elfOrange.png";
 
     this.update = function() {
         ctx = myGameArea.context;
-		ctx.drawImage(this.img, this.x, this.y);
+		ctx.drawImage(spriteSheet, 0, 100, 100, 100, this.x, this.y, 30, 30);
         // ctx.fillStyle = this.color;
         // ctx.fillRect(this.x, this.y, this.width, this.height);
 		// ctx.strokeStyle = "#000000";
@@ -265,6 +266,7 @@ function startGame(event, difficulty) {
 
 function updateGameArea() {
     myGameArea.clear();
+
     player1.speedX = 0;
     player1.speedY = 0;
     if(myGameArea.keys && myGameArea.keys[37]) {player1.speedX = -2; }
