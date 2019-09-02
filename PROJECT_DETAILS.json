@@ -13,7 +13,7 @@
 						"Consider adding functionality to share a high score on social media"
 				    ],
 	"live-link" : "http://projects.christianfarmer.org/software/games/catch-the-elves", 
-	"demonstration-link" : "Contact me", 
+	"demonstration-link" : "http://projects.christianfarmer.org/software/games/catch-the-elves/assets/videos/demo.mp4", 
 	"repository-link" : "Contact me", 
 	"supported-platforms" : ["Windows", "macOS", "Linux"],
 	"supported-browsers" : ["Mozilla Firefox"], 
