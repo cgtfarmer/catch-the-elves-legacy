@@ -136,14 +136,26 @@ function elf(width, height, color, x, y) {
     this.speedY = 0;
     this.x = x;
     this.y = y;
+	this.img = new Image();
+	this.img.src = "assets/images/elfOrange.png";
 
     this.update = function() {
         ctx = myGameArea.context;
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-		ctx.strokeStyle = "#000000";
-        ctx.strokeRect(this.x, this.y, this.width, this.height);
+		ctx.drawImage(this.img, this.x, this.y);
+        // ctx.fillStyle = this.color;
+        // ctx.fillRect(this.x, this.y, this.width, this.height);
+		// ctx.strokeStyle = "#000000";
+        // ctx.strokeRect(this.x, this.y, this.width, this.height);
     }
+
+	this.updateSpeed = function() {
+		this.speedX = 0;
+		this.speedY = 0;
+		this.speedX = getRndInteger((elfSpeeds[gameDifficulty]*-1),
+									elfSpeeds[gameDifficulty]);
+		this.speedY = getRndInteger((elfSpeeds[gameDifficulty]*-1),
+									elfSpeeds[gameDifficulty]);
+	}
 
     this.updatePosition = function() {
         this.x += this.speedX;
@@ -277,16 +289,11 @@ function updateGameArea() {
 	}
 
 	if(myGameArea.frameNumber % directionChangeRate[gameDifficulty] == 0 || myGameArea.frameNumber == 0) {
+
 		for(i = 0; i < elves.length; i++) {
-			var elf = elves[i];
-			elf.speedX = 0;
-			elf.speedY = 0;
-			// elf.speedX = getRndInteger((elfSpeeds["hard"]*-1), elfSpeeds["hard"]);
-			 elf.speedX = getRndInteger((elfSpeeds[gameDifficulty]*-1),
-										elfSpeeds[gameDifficulty]);
-			 elf.speedY = getRndInteger((elfSpeeds[gameDifficulty]*-1),
-									    elfSpeeds[gameDifficulty]);
+			elves[i].updateSpeed();
 		}
+
 		updateCount = 0;
 	}
 
