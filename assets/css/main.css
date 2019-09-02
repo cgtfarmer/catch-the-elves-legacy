@@ -21,6 +21,10 @@ canvas {
     background-color: #f1f1f1;
 }
 
+.inline * {
+	display: inline;
+}
+
 #page-header {
 	margin: 20px 0px;
 	text-align: center;
