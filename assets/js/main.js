@@ -2,29 +2,53 @@ var player1;
 var gameTimer;
 var gameCatchCounter;
 
+var spriteMap = {
+	"filepath": "assets/images/spriteSheet.png",
+	"source-size": 100,
+	"destination-sizes": {
+		"elf": 30,
+		"santa": 50
+	},
+	"rows": {
+		"up": 0,
+		"right": 100,
+		"down": 200,
+		"left": 300
+	},
+	"columns": {
+		"santa": 0,
+		"elfBlue": 100,
+		"elfGray": 200,
+		"elfGreen": 300,
+		"elfOrange": 400,
+		"elfYellow": 500
+	}
+};
+
 spriteSheet = new Image();
-spriteSheet.src = "assets/images/spriteSheet.png";
+spriteSheet.src = spriteMap["filepath"];
 
 var elfSpeeds = { easy : 1,
 				  medium : 2,
 				  hard : 5,
 				  insane : 7,
 				  legendary : 11,
-				  impossible : 15 }
+				  impossible : 15 };
 
 var directionChangeRate = { easy : 150,
 							medium : 100,
 							hard : 50,
 							insane : 25,
 							legendary : 15,
-							impossible : 10 }
+							impossible : 10 };
 
 var gameDifficulty;
 
 const NUM_ELVES = 10;
 
 var elves = [];
-var elfColors = ["#00ff00", "#0000ff", "#ffff00", "#00ffff", "#ff00ff", "#ff8800"];
+// var elfColors = ["#00ff00", "#0000ff", "#ffff00", "#00ffff", "#ff00ff", "#ff8800"];
+var elfColors = ["elfBlue", "elfGray", "elfGreen", "elfOrange", "elfYellow"]
 
 var updateCount = 0;
 var spaceHasBeenEvaluated = false;
@@ -142,7 +166,69 @@ function elf(width, height, color, x, y) {
 
     this.update = function() {
         ctx = myGameArea.context;
-		ctx.drawImage(spriteSheet, 0, 100, 100, 100, this.x, this.y, 30, 30);
+
+		if(this.speedY < 0) {
+			ctx.drawImage(
+				spriteSheet,
+				spriteMap["rows"]["up"],
+				spriteMap["columns"][this.color],
+				spriteMap["source-size"],
+				spriteMap["source-size"],
+				this.x,
+				this.y,
+				spriteMap["destination-sizes"]["elf"],
+				spriteMap["destination-sizes"]["elf"]
+			);
+		} else if(this.speedY > 0) {
+			ctx.drawImage(
+				spriteSheet,
+				spriteMap["rows"]["down"],
+				spriteMap["columns"][this.color],
+				spriteMap["source-size"],
+				spriteMap["source-size"],
+				this.x,
+				this.y,
+				spriteMap["destination-sizes"]["elf"],
+				spriteMap["destination-sizes"]["elf"]
+			);
+		} else if(this.speedX > 0) {
+			ctx.drawImage(
+				spriteSheet,
+				spriteMap["rows"]["right"],
+				spriteMap["columns"][this.color],
+				spriteMap["source-size"],
+				spriteMap["source-size"],
+				this.x,
+				this.y,
+				spriteMap["destination-sizes"]["elf"],
+				spriteMap["destination-sizes"]["elf"]
+			);
+		} else if(this.speedX < 0) {
+			ctx.drawImage(
+				spriteSheet,
+				spriteMap["rows"]["left"],
+				spriteMap["columns"][this.color],
+				spriteMap["source-size"],
+				spriteMap["source-size"],
+				this.x,
+				this.y,
+				spriteMap["destination-sizes"]["elf"],
+				spriteMap["destination-sizes"]["elf"]
+			);
+		} else {
+			ctx.drawImage(
+				spriteSheet,
+				spriteMap["rows"]["down"],
+				spriteMap["columns"][this.color],
+				spriteMap["source-size"],
+				spriteMap["source-size"],
+				this.x,
+				this.y,
+				spriteMap["destination-sizes"]["elf"],
+				spriteMap["destination-sizes"]["elf"]
+			);
+		}
+
         // ctx.fillStyle = this.color;
         // ctx.fillRect(this.x, this.y, this.width, this.height);
 		// ctx.strokeStyle = "#000000";
