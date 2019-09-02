@@ -106,16 +106,90 @@ function player(width, height, color, x, y) {
     this.speedY = 0;
     this.x = x;
     this.y = y;
+	this.lastDirection = "down";
 
     this.update = function() {
         ctx = myGameArea.context;
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
 
-		ctx.strokeStyle = "#000000";
-        ctx.strokeRect(this.x, this.y, this.width, this.height);
+        // ctx.fillStyle = this.color;
+        // ctx.fillRect(this.x, this.y, this.width, this.height);
+//
+		// ctx.strokeStyle = "#000000";
+        // ctx.strokeRect(this.x, this.y, this.width, this.height);
+//
+		// THIS IS THE CATCH HELPER OUTLINE
+        // ctx.strokeRect((this.x - 10), (this.y - 10), (this.width + 20), (this.height + 20));
 
-        ctx.strokeRect((this.x - 10), (this.y - 10), (this.width + 20), (this.height + 20));
+		if(this.speedY < 0) {
+			ctx.drawImage(
+				spriteSheet,
+				spriteMap["rows"]["up"],
+				spriteMap["columns"]["santa"],
+				spriteMap["source-size"],
+				spriteMap["source-size"],
+				this.x,
+				this.y,
+				spriteMap["destination-sizes"]["santa"],
+				spriteMap["destination-sizes"]["santa"]
+			);
+
+			this.lastDirection = "up";
+		} else if(this.speedY > 0) {
+			ctx.drawImage(
+				spriteSheet,
+				spriteMap["rows"]["down"],
+				spriteMap["columns"]["santa"],
+				spriteMap["source-size"],
+				spriteMap["source-size"],
+				this.x,
+				this.y,
+				spriteMap["destination-sizes"]["santa"],
+				spriteMap["destination-sizes"]["santa"]
+			);
+
+			this.lastDirection = "down";
+		} else if(this.speedX < 0) {
+			ctx.drawImage(
+				spriteSheet,
+				spriteMap["rows"]["left"],
+				spriteMap["columns"]["santa"],
+				spriteMap["source-size"],
+				spriteMap["source-size"],
+				this.x,
+				this.y,
+				spriteMap["destination-sizes"]["santa"],
+				spriteMap["destination-sizes"]["santa"]
+			);
+
+			this.lastDirection = "left";
+		} else if(this.speedX > 0) {
+			ctx.drawImage(
+				spriteSheet,
+				spriteMap["rows"]["right"],
+				spriteMap["columns"]["santa"],
+				spriteMap["source-size"],
+				spriteMap["source-size"],
+				this.x,
+				this.y,
+				spriteMap["destination-sizes"]["santa"],
+				spriteMap["destination-sizes"]["santa"]
+			);
+
+			this.lastDirection = "right";
+		} else {
+			ctx.drawImage(
+				spriteSheet,
+				spriteMap["rows"][this.lastDirection],
+				spriteMap["columns"]["santa"],
+				spriteMap["source-size"],
+				spriteMap["source-size"],
+				this.x,
+				this.y,
+				spriteMap["destination-sizes"]["santa"],
+				spriteMap["destination-sizes"]["santa"]
+			);
+		}
+
     }
 
     this.updatePosition = function() {
@@ -163,6 +237,7 @@ function elf(width, height, color, x, y) {
     this.speedY = 0;
     this.x = x;
     this.y = y;
+	this.lastDirection = "down";
 
     this.update = function() {
         ctx = myGameArea.context;
@@ -179,6 +254,8 @@ function elf(width, height, color, x, y) {
 				spriteMap["destination-sizes"]["elf"],
 				spriteMap["destination-sizes"]["elf"]
 			);
+
+			this.lastDirection = "up";
 		} else if(this.speedY > 0) {
 			ctx.drawImage(
 				spriteSheet,
@@ -191,18 +268,8 @@ function elf(width, height, color, x, y) {
 				spriteMap["destination-sizes"]["elf"],
 				spriteMap["destination-sizes"]["elf"]
 			);
-		} else if(this.speedX > 0) {
-			ctx.drawImage(
-				spriteSheet,
-				spriteMap["rows"]["right"],
-				spriteMap["columns"][this.color],
-				spriteMap["source-size"],
-				spriteMap["source-size"],
-				this.x,
-				this.y,
-				spriteMap["destination-sizes"]["elf"],
-				spriteMap["destination-sizes"]["elf"]
-			);
+
+			this.lastDirection = "down";
 		} else if(this.speedX < 0) {
 			ctx.drawImage(
 				spriteSheet,
@@ -215,10 +282,26 @@ function elf(width, height, color, x, y) {
 				spriteMap["destination-sizes"]["elf"],
 				spriteMap["destination-sizes"]["elf"]
 			);
+
+			this.lastDirection = "left";
+		} else if(this.speedX < 0) {
+			ctx.drawImage(
+				spriteSheet,
+				spriteMap["rows"]["right"],
+				spriteMap["columns"][this.color],
+				spriteMap["source-size"],
+				spriteMap["source-size"],
+				this.x,
+				this.y,
+				spriteMap["destination-sizes"]["elf"],
+				spriteMap["destination-sizes"]["elf"]
+			);
+
+			this.lastDirection = "right";
 		} else {
 			ctx.drawImage(
 				spriteSheet,
-				spriteMap["rows"]["down"],
+				spriteMap["rows"][this.lastDirection],
 				spriteMap["columns"][this.color],
 				spriteMap["source-size"],
 				spriteMap["source-size"],
@@ -330,7 +413,8 @@ function startGame(event, difficulty) {
 
     myGameArea.start(); // disable?
 	$("#game-canvas").show();
-    player1 = new player(30, 30, "#ff0000", (myGameArea.canvas.width/2), (myGameArea.canvas.height/2));
+    // player1 = new player(30, 30, "#ff0000", (myGameArea.canvas.width/2), (myGameArea.canvas.height/2));
+    player1 = new player(spriteMap["destination-sizes"]["santa"], spriteMap["destination-sizes"]["santa"], "#ff0000", (myGameArea.canvas.width/2), (myGameArea.canvas.height/2));
 
 	let timerFontSize = 28;
 	gameTimer = new timer(timerFontSize, (myGameArea.canvas.width - 190), (timerFontSize + 10));
@@ -339,12 +423,12 @@ function startGame(event, difficulty) {
 	gameCatchCounter = new catchCounter(catchCounterFontSize, (myGameArea.canvas.width - 190), (catchCounterFontSize + 50));
 	gameCatchCounter.update();
 
-	var elfWidth = 30;
-	var elfHeight = 30;
+	var elfWidth = spriteMap["destination-sizes"]["elf"];
+	var elfHeight = spriteMap["destination-sizes"]["elf"];
 	for(i = 0; i < NUM_ELVES; i++) {
 		let x = getRndInteger(0, (myGameArea.canvas.width - elfWidth));
 		let y = getRndInteger(0, (myGameArea.canvas.width - elfHeight));
-		let color = elfColors[getRndInteger(0, elfColors.length)];
+		let color = elfColors[getRndInteger(0, elfColors.length - 1)];
 		elves[i] = new elf(elfWidth, elfHeight, color, x, y);
 	}
 
