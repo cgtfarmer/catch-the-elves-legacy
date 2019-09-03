@@ -284,7 +284,7 @@ function elf(width, height, color, x, y) {
 			);
 
 			this.lastDirection = "left";
-		} else if(this.speedX < 0) {
+		} else if(this.speedX > 0) {
 			ctx.drawImage(
 				spriteSheet,
 				spriteMap["rows"]["right"],
