@@ -4,7 +4,7 @@
 	"revenue" : "No", 
 	"status" : "Complete", 
 	"summary" : "This is a single-player game where the objective is to catch all the 'elves' running around on the screen as quickly as possible",
-	"description" : "The game components are rendered using the HTML canvas element and JavaScript", 
+	"description" : "The game components are rendered using the HTML canvas element and JavaScript. To date, I've also built 2 spinoffs of this game (both with interested communities in mind) with alternate graphics: 'Catch the Bunnies' and 'Catch the Ramen'. These games can be accessed from christianfarmer.org > Games", 
 	"future-work" : [
 						"Consider adding a pause menu",
 						"Consider adding a main menu inside the canvas",
