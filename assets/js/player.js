@@ -1,6 +1,11 @@
+// Player.width = 50;
+// Player.height = 50;
+
 class Player extends MovableCharacter {
 
-	constructor(width, height, color, x, y) {
+	constructor(color, x, y) {
+		let width = 50;
+		let height = 50;
 		super(width, height, color, x, y);
 	}
 

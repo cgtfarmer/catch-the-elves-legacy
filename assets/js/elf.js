@@ -1,6 +1,8 @@
 class Elf extends MovableCharacter {
 
-	constructor(width, height, color, x, y) {
+	constructor(color, x, y) {
+		let width = 30;
+		let height = 30;
 		super(width, height, color, x, y);
 	}
 

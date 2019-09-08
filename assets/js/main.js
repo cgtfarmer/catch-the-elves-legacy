@@ -5,10 +5,6 @@ var gameCatchCounter;
 var spriteMap = {
 	"filepath": "assets/images/spriteSheet.png",
 	"source-size": 100,
-	"destination-sizes": {
-		"elf": 30,
-		"santa": 50
-	},
 	"columns": {
 		"up": 0,
 		"right": 100,
@@ -128,7 +124,10 @@ function startGame(event, difficulty) {
     myGameArea.start(); // disable?
 	$("#game-canvas").show();
     // player1 = new player(30, 30, "#ff0000", (myGameArea.canvas.width/2), (myGameArea.canvas.height/2));
-    player1 = new Player(spriteMap["destination-sizes"]["santa"], spriteMap["destination-sizes"]["santa"], "santa", (myGameArea.canvas.width/2), (myGameArea.canvas.height/2));
+    player1 = new Player("santa", (myGameArea.canvas.width/2), (myGameArea.canvas.height/2));
+	// make this consider the size of the player just like for the elves
+	// it's not perfectly centered because it doesn't consider the
+	// width/height of the player
 
 	let timerFontSize = 28;
 	gameTimer = new timer(timerFontSize, (myGameArea.canvas.width - 190), (timerFontSize + 10));
@@ -137,13 +136,11 @@ function startGame(event, difficulty) {
 	gameCatchCounter = new catchCounter(catchCounterFontSize, (myGameArea.canvas.width - 190), (catchCounterFontSize + 50));
 	gameCatchCounter.update();
 
-	var elfWidth = spriteMap["destination-sizes"]["elf"];
-	var elfHeight = spriteMap["destination-sizes"]["elf"];
 	for(i = 0; i < NUM_ELVES; i++) {
-		let x = getRndInteger(0, (myGameArea.canvas.width - elfWidth));
-		let y = getRndInteger(0, (myGameArea.canvas.width - elfHeight));
+		let x = getRndInteger(0, (myGameArea.canvas.width - 30));
+		let y = getRndInteger(0, (myGameArea.canvas.width - 30));
 		let color = elfColors[getRndInteger(0, elfColors.length - 1)];
-		elves[i] = new Elf(elfWidth, elfHeight, color, x, y);
+		elves[i] = new Elf(color, x, y);
 	}
 
 }
