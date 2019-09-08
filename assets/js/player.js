@@ -4,13 +4,6 @@ class Player extends MovableCharacter {
 		super(width, height, color, x, y);
 	}
 
-    updatePosition() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-		this.x = this.handleWrapping(this.x, this.width, myGameArea.canvas.width);
-		this.y = this.handleWrapping(this.y, this.height, myGameArea.canvas.height);
-    }
-
 	handleWrapping(position, length, canvasLength) {
 
 		if(position > (canvasLength-length)) {
@@ -39,4 +32,3 @@ class Player extends MovableCharacter {
 	}
 
 }
-

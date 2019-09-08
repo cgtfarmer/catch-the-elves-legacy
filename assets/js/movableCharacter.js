@@ -32,8 +32,8 @@ class MovableCharacter {
 				spriteMap["source-size"],
 				this.x,
 				this.y,
-				spriteMap["destination-sizes"][this.color],
-				spriteMap["destination-sizes"][this.color]
+				this.width,
+				this.height
 			);
 
 			this.lastDirection = "up";
@@ -46,8 +46,8 @@ class MovableCharacter {
 				spriteMap["source-size"],
 				this.x,
 				this.y,
-				spriteMap["destination-sizes"][this.color],
-				spriteMap["destination-sizes"][this.color]
+				this.width,
+				this.height
 			);
 
 			this.lastDirection = "down";
@@ -60,8 +60,8 @@ class MovableCharacter {
 				spriteMap["source-size"],
 				this.x,
 				this.y,
-				spriteMap["destination-sizes"][this.color],
-				spriteMap["destination-sizes"][this.color]
+				this.width,
+				this.height
 			);
 
 			this.lastDirection = "left";
@@ -74,8 +74,8 @@ class MovableCharacter {
 				spriteMap["source-size"],
 				this.x,
 				this.y,
-				spriteMap["destination-sizes"][this.color],
-				spriteMap["destination-sizes"][this.color]
+				this.width,
+				this.height
 			);
 
 			this.lastDirection = "right";
@@ -88,11 +88,18 @@ class MovableCharacter {
 				spriteMap["source-size"],
 				this.x,
 				this.y,
-				spriteMap["destination-sizes"][this.color],
-				spriteMap["destination-sizes"][this.color]
+				this.width,
+				this.height
 			);
 		}
 
+    }
+
+    updatePosition() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+		this.x = this.handleWrapping(this.x, this.width, myGameArea.canvas.width);
+		this.y = this.handleWrapping(this.y, this.height, myGameArea.canvas.height);
     }
 
 }
