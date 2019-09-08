@@ -1,12 +1,7 @@
-// Player.width = 50;
-// Player.height = 50;
-
 class Player extends MovableCharacter {
 
 	constructor(color, x, y) {
-		let width = 50;
-		let height = 50;
-		super(width, height, color, x, y);
+		super(Player.width, Player.height, color, x, y);
 	}
 
 	handleWrapping(position, length, canvasLength) {
@@ -37,3 +32,7 @@ class Player extends MovableCharacter {
 	}
 
 }
+
+Player.width = 50;
+Player.height = 50;
+

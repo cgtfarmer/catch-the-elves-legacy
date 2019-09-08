@@ -234,3 +234,4 @@ function convertSecondsToTimeStr(hundredthSeconds) {
 	return minutes + ":" + seconds;
 }
 
+console.log(Player.width);
