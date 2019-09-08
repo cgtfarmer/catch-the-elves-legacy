@@ -1,0 +1,3 @@
+Make initial x/y coords for player consider the pixel size of the player character, just like the elf stuff does
+	it's not perfectly centered because it doesn't consider the width/height of the player
+

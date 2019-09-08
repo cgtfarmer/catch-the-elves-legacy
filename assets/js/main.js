@@ -50,9 +50,6 @@ var updateCount = 0;
 var spaceHasBeenEvaluated = false;
 var time = 0;
 
-var youWinLabel;
-var endTimeLabel;
-
 // ===========================================================================
 // => END OF GLOBAL VARIABLES
 // ===========================================================================
@@ -125,9 +122,6 @@ function startGame(event, difficulty) {
 	$("#game-canvas").show();
     // player1 = new player(30, 30, "#ff0000", (myGameArea.canvas.width/2), (myGameArea.canvas.height/2));
     player1 = new Player("santa", (myGameArea.canvas.width/2), (myGameArea.canvas.height/2));
-	// make this consider the size of the player just like for the elves
-	// it's not perfectly centered because it doesn't consider the
-	// width/height of the player
 
 	let timerFontSize = 28;
 	gameTimer = new timer(timerFontSize, (myGameArea.canvas.width - 190), (timerFontSize + 10));
@@ -137,8 +131,8 @@ function startGame(event, difficulty) {
 	gameCatchCounter.update();
 
 	for(i = 0; i < NUM_ELVES; i++) {
-		let x = getRndInteger(0, (myGameArea.canvas.width - 30));
-		let y = getRndInteger(0, (myGameArea.canvas.width - 30));
+		let x = getRndInteger(0, (myGameArea.canvas.width - Elf.width));
+		let y = getRndInteger(0, (myGameArea.canvas.height - Elf.height));
 		let color = elfColors[getRndInteger(0, elfColors.length - 1)];
 		elves[i] = new Elf(color, x, y);
 	}
@@ -214,8 +208,8 @@ function label(text, fontSize, x, y) {
 function endGame() {
 	myGameArea.clear();
 
-	youWinLabel = new label("You Win!", 108, myGameArea.canvas.width/2, (myGameArea.canvas.height/2) - 20);
-	endTimeLabel = new label("Time: " + gameTimer.minutes + ":" + gameTimer.seconds + ":" + gameTimer.centiseconds, 36, myGameArea.canvas.width/2, (myGameArea.canvas.height/2) + 55);
+	var youWinLabel = new label("You Win!", 108, myGameArea.canvas.width/2, (myGameArea.canvas.height/2) - 20);
+	var endTimeLabel = new label("Time: " + gameTimer.minutes + ":" + gameTimer.seconds + ":" + gameTimer.centiseconds, 36, myGameArea.canvas.width/2, (myGameArea.canvas.height/2) + 55);
 
 	youWinLabel.update();
 	endTimeLabel.update();
@@ -234,4 +228,3 @@ function convertSecondsToTimeStr(hundredthSeconds) {
 	return minutes + ":" + seconds;
 }
 
-console.log(Player.width);
