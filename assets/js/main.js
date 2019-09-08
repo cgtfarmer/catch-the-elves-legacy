@@ -4,39 +4,6 @@ var gameCatchCounter;
 
 var fonts = {"primary": "Arial"};
 
-// var spriteSheet2 = new SpriteSheet(
-	// "assets/images/spriteSheet.png",
-	// 100,
-	// 100,
-	// ("up", "right", "down", "left"),
-	// ("santa", "elfBlue", "elfGray", "elfGreen", "elfOrange", "elfYellow")
-// );
-//
-// var spriteMap = {
-	// "filepath": "assets/images/spriteSheet.png",
-	// "source-size": 100,
-	// "columns": {
-		// "up": 0,
-		// "right": 100,
-		// "down": 200,
-		// "left": 300
-	// },
-	// "rows": {
-		// "santa": 0,
-		// "elfBlue": 100,
-		// "elfGray": 200,
-		// "elfGreen": 300,
-		// "elfOrange": 400,
-		// "elfYellow": 500
-	// }
-// };
-//
-// spriteSheet = new Image();
-// spriteSheet.src = spriteMap["filepath"];
-// console.log("here1");
-// console.log(["a", "b", "c"]);
-// console.log("here2");
-
 var spriteSheetMap = new SpriteSheetMap(
 	["up", "right", "down", "left"],
 	["santa", "elfBlue", "elfGray", "elfGreen", "elfOrange", "elfYellow"],
@@ -62,11 +29,7 @@ var gameDifficulty;
 const NUM_ELVES = 10;
 
 var elves = [];
-// var elfColors = ["#00ff00", "#0000ff", "#ffff00", "#00ffff", "#ff00ff", "#ff8800"];
-// console.log(spriteSheetMap.entities);
-// console.log(Object.keys(spriteSheetMap.entities));
 var elfOptions = Object.keys(spriteSheetMap.entities).slice(1);
-
 
 var updateCount = 0;
 var spaceHasBeenEvaluated = false;
@@ -104,13 +67,6 @@ var myGameArea = {
 			});
 
 		}
-        // window.addEventListener('keydown', function(e) {
-            // myGameArea.keys = (myGameArea.keys || []);
-            // myGameArea.keys[e.keyCode] = (e.type == "keydown");
-        // })
-        // window.addEventListener('keyup', function (e) {
-            // myGameArea.keys[e.keyCode] = (e.type == "keydown");
-        // })
     },
     clear : function(){
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -138,12 +94,9 @@ function catchCounter(fontSize, x, y) {
 function startGame(event, difficulty) {
 	event.preventDefault();
 	gameDifficulty = difficulty;
-	// console.log(event);
-	// console.log(difficulty);
 
     myGameArea.start(); // disable?
 	$("#game-canvas").show();
-    // player1 = new player(30, 30, "#ff0000", (myGameArea.canvas.width/2), (myGameArea.canvas.height/2));
     player1 = new Player("santa", (myGameArea.canvas.width/2), (myGameArea.canvas.height/2));
 
 	let timerFontSize = 28;

@@ -17,93 +17,33 @@ class MovableCharacter {
         // ctx.strokeRect((this.x - 10), (this.y - 10), (this.width + 20), (this.height + 20));
 
 		if(this.speedY < 0) {
-	// drawEntity(ctx, entity, orientation, x, y, width, height) {
-
 			spriteSheetMap.drawEntity(ctx, this.entity, "up",
 				this.x, this.y, this.width, this.height);
-			// ctx.drawImage(
-				// spriteSheetMap.spriteSheet.image,
-				// spriteSheetMap.orientations.up,
-				// spriteSheetMap.entities[this.entity],
-				// spriteSheetMap.spriteSheet.spriteWidth,
-				// spriteSheetMap.spriteSheet.spriteHeight,
-				// this.x,
-				// this.y,
-				// this.width,
-				// this.height
-			// );
 
 			this.lastDirection = "up";
-		} else if(this.speedY > 0) {
 
+		} else if(this.speedY > 0) {
 			spriteSheetMap.drawEntity(ctx, this.entity, "down",
 				this.x, this.y, this.width, this.height);
 
-			// ctx.drawImage(
-				// spriteSheet,
-				// spriteMap["columns"]["down"],
-				// spriteMap["rows"][this.color],
-				// spriteMap["source-size"],
-				// spriteMap["source-size"],
-				// this.x,
-				// this.y,
-				// this.width,
-				// this.height
-			// );
-
 			this.lastDirection = "down";
-		} else if(this.speedX < 0) {
 
+		} else if(this.speedX < 0) {
 			spriteSheetMap.drawEntity(ctx, this.entity, "left",
 				this.x, this.y, this.width, this.height);
 
-			// ctx.drawImage(
-				// spriteSheet,
-				// spriteMap["columns"]["left"],
-				// spriteMap["rows"][this.color],
-				// spriteMap["source-size"],
-				// spriteMap["source-size"],
-				// this.x,
-				// this.y,
-				// this.width,
-				// this.height
-			// );
-
 			this.lastDirection = "left";
-		} else if(this.speedX > 0) {
 
+		} else if(this.speedX > 0) {
 			spriteSheetMap.drawEntity(ctx, this.entity, "right",
 				this.x, this.y, this.width, this.height);
 
-			// ctx.drawImage(
-				// spriteSheet,
-				// spriteMap["columns"]["right"],
-				// spriteMap["rows"][this.color],
-				// spriteMap["source-size"],
-				// spriteMap["source-size"],
-				// this.x,
-				// this.y,
-				// this.width,
-				// this.height
-			// );
-
 			this.lastDirection = "right";
-		} else {
 
+		} else {
 			spriteSheetMap.drawEntity(ctx, this.entity, this.lastDirection,
 				this.x, this.y, this.width, this.height);
 
-			// ctx.drawImage(
-				// spriteSheet,
-				// spriteMap["columns"][this.lastDirection],
-				// spriteMap["rows"][this.color],
-				// spriteMap["source-size"],
-				// spriteMap["source-size"],
-				// this.x,
-				// this.y,
-				// this.width,
-				// this.height
-			// );
 		}
 
     }
