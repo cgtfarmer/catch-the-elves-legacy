@@ -36,4 +36,10 @@ consider letting them choose parameters:
 	speed of you
 	add/take away from color options (keep it random)
 
+# =============================================================================
+
+Make initial x/y coords for player consider the pixel size of the player character, just like the elf stuff does
+	it's not perfectly centered because it doesn't consider the width/height of the player
+
+Figure out how the sprite sheet/movableCharacter update code should work - I want to tell the elf what entity it should be, and then that's it - I want it to know how to handle the rest. Same thing for the sprite sheet - I want to tell it a filepath, then give it the image dimensions, then I guess tell it the orientation orders and entity names for the columns, then it's really easy for everyone to know exactly how to use it from there
 

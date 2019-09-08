@@ -1,0 +1,39 @@
+class Elf extends MovableCharacter {
+
+	constructor(width, height, color, x, y) {
+		super(width, height, color, x, y);
+	}
+
+	updateSpeed() {
+		this.speedX = 0;
+		this.speedY = 0;
+		this.speedX = getRndInteger((elfSpeeds[gameDifficulty]*-1),
+			elfSpeeds[gameDifficulty]);
+		this.speedY = getRndInteger((elfSpeeds[gameDifficulty]*-1),
+			elfSpeeds[gameDifficulty]);
+	}
+
+    updatePosition() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+		this.x = this.handleWrapping(this.x, this.width, myGameArea.canvas.width);
+		this.y = this.handleWrapping(this.y, this.height, myGameArea.canvas.height);
+    }
+
+	handleWrapping(position, length, canvasLength) {
+		// if(position > (canvasLength-length)) {
+			// position = (position-canvasLength);
+		// } else if(position < 0) {
+			// position = (canvasLength+position);
+		// }
+
+		if(position > canvasLength) {
+			position = (position-canvasLength);
+		} else if(position < (0-length)) {
+			position = (canvasLength+position);
+		}
+
+		return position;
+	}
+
+}
