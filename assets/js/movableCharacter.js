@@ -26,8 +26,8 @@ class MovableCharacter {
 		if(this.speedY < 0) {
 			ctx.drawImage(
 				spriteSheet,
-				spriteMap["rows"]["up"],
-				spriteMap["columns"][this.color],
+				spriteMap["columns"]["up"],
+				spriteMap["rows"][this.color],
 				spriteMap["source-size"],
 				spriteMap["source-size"],
 				this.x,
@@ -40,8 +40,8 @@ class MovableCharacter {
 		} else if(this.speedY > 0) {
 			ctx.drawImage(
 				spriteSheet,
-				spriteMap["rows"]["down"],
-				spriteMap["columns"][this.color],
+				spriteMap["columns"]["down"],
+				spriteMap["rows"][this.color],
 				spriteMap["source-size"],
 				spriteMap["source-size"],
 				this.x,
@@ -54,8 +54,8 @@ class MovableCharacter {
 		} else if(this.speedX < 0) {
 			ctx.drawImage(
 				spriteSheet,
-				spriteMap["rows"]["left"],
-				spriteMap["columns"][this.color],
+				spriteMap["columns"]["left"],
+				spriteMap["rows"][this.color],
 				spriteMap["source-size"],
 				spriteMap["source-size"],
 				this.x,
@@ -68,8 +68,8 @@ class MovableCharacter {
 		} else if(this.speedX > 0) {
 			ctx.drawImage(
 				spriteSheet,
-				spriteMap["rows"]["right"],
-				spriteMap["columns"][this.color],
+				spriteMap["columns"]["right"],
+				spriteMap["rows"][this.color],
 				spriteMap["source-size"],
 				spriteMap["source-size"],
 				this.x,
@@ -82,8 +82,8 @@ class MovableCharacter {
 		} else {
 			ctx.drawImage(
 				spriteSheet,
-				spriteMap["rows"][this.lastDirection],
-				spriteMap["columns"][this.color],
+				spriteMap["columns"][this.lastDirection],
+				spriteMap["rows"][this.color],
 				spriteMap["source-size"],
 				spriteMap["source-size"],
 				this.x,

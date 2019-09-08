@@ -9,13 +9,13 @@ var spriteMap = {
 		"elf": 30,
 		"santa": 50
 	},
-	"rows": {
+	"columns": {
 		"up": 0,
 		"right": 100,
 		"down": 200,
 		"left": 300
 	},
-	"columns": {
+	"rows": {
 		"santa": 0,
 		"elfBlue": 100,
 		"elfGray": 200,
