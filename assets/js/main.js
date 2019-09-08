@@ -143,7 +143,7 @@ function startGame(event, difficulty) {
 		let x = getRndInteger(0, (myGameArea.canvas.width - elfWidth));
 		let y = getRndInteger(0, (myGameArea.canvas.width - elfHeight));
 		let color = elfColors[getRndInteger(0, elfColors.length - 1)];
-		elves[i] = new elf(elfWidth, elfHeight, color, x, y);
+		elves[i] = new Elf(elfWidth, elfHeight, color, x, y);
 	}
 
 }
@@ -184,9 +184,8 @@ function updateGameArea() {
 	}
 
 	for(i = 0; i < elves.length; i++) {
-		var elf = elves[i];
-		elf.updatePosition();
-		elf.update();
+		elves[i].updatePosition();
+		elves[i].update();
 	}
 
 	updateCount++;

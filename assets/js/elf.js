@@ -1,15 +1,18 @@
-function elf(width, height, color, x, y) {
-    this.gamearea = myGameArea;
-    this.width = width;
-    this.height = height;
-	this.color = color;
-    this.speedX = 0;
-    this.speedY = 0;
-    this.x = x;
-    this.y = y;
-	this.lastDirection = "down";
+class Elf {
 
-    this.update = function() {
+	constructor(width, height, color, x, y) {
+		this.gamearea = myGameArea;
+		this.width = width;
+		this.height = height;
+		this.color = color;
+		this.speedX = 0;
+		this.speedY = 0;
+		this.x = x;
+		this.y = y;
+		this.lastDirection = "down";
+	}
+
+    update() {
         ctx = myGameArea.context;
 
 		if(this.speedY < 0) {
@@ -88,7 +91,7 @@ function elf(width, height, color, x, y) {
         // ctx.strokeRect(this.x, this.y, this.width, this.height);
     }
 
-	this.updateSpeed = function() {
+	updateSpeed() {
 		this.speedX = 0;
 		this.speedY = 0;
 		this.speedX = getRndInteger((elfSpeeds[gameDifficulty]*-1),
@@ -97,14 +100,14 @@ function elf(width, height, color, x, y) {
 									elfSpeeds[gameDifficulty]);
 	}
 
-    this.updatePosition = function() {
+    updatePosition() {
         this.x += this.speedX;
         this.y += this.speedY;
 		this.x = this.handleWrapping(this.x, this.width, myGameArea.canvas.width);
 		this.y = this.handleWrapping(this.y, this.height, myGameArea.canvas.height);
     }
 
-	this.handleWrapping = function(position, length, canvasLength) {
+	handleWrapping(position, length, canvasLength) {
 		// if(position > (canvasLength-length)) {
 			// position = (position-canvasLength);
 		// } else if(position < 0) {
@@ -121,3 +124,4 @@ function elf(width, height, color, x, y) {
 	}
 
 }
+

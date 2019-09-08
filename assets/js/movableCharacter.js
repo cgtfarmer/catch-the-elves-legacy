@@ -95,10 +95,4 @@ class MovableCharacter {
 
     }
 
-    updatePosition() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-		this.x = this.handleWrapping(this.x, this.width, myGameArea.canvas.width);
-		this.y = this.handleWrapping(this.y, this.height, myGameArea.canvas.height);
-    }
 }
