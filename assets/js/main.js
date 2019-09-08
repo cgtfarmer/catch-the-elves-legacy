@@ -2,6 +2,8 @@ var player1;
 var gameTimer;
 var gameCatchCounter;
 
+var fonts = {"primary": "Arial"};
+
 var spriteMap = {
 	"filepath": "assets/images/spriteSheet.png",
 	"source-size": 100,
@@ -103,7 +105,7 @@ function catchCounter(fontSize, x, y) {
 
     this.update = function() {
 		ctx = myGameArea.context;
-		ctx.font = fontSize + "px Arial";
+		ctx.font = fontSize + "px " + fonts["primary"];
 		ctx.fillStyle = "#000000";
 		this.text = "CAUGHT: " + (NUM_ELVES - elves.length) + "/" + NUM_ELVES;
 		ctx.fillText(this.text, this.x, this.y);
@@ -189,15 +191,16 @@ function updateGameArea() {
 	return;
 }
 
-function label(text, fontSize, x, y) {
+function label(text, fontSize, fontFamily, x, y) {
 	this.text = text;
 	this.fontSize = fontSize;
+	this.fontFamily = fontFamily;
 	this.x = x;
 	this.y = y;
 
     this.update = function() {
 		ctx = myGameArea.context;
-		ctx.font = this.fontSize + "px Arial";
+		ctx.font = this.fontSize + "px " + fontFamily;
 		ctx.fillStyle = "#000000";
 		ctx.textAlign = "center";
 		ctx.fillText(this.text, this.x, this.y);
@@ -208,8 +211,8 @@ function label(text, fontSize, x, y) {
 function endGame() {
 	myGameArea.clear();
 
-	var youWinLabel = new label("You Win!", 108, myGameArea.canvas.width/2, (myGameArea.canvas.height/2) - 20);
-	var endTimeLabel = new label("Time: " + gameTimer.minutes + ":" + gameTimer.seconds + ":" + gameTimer.centiseconds, 36, myGameArea.canvas.width/2, (myGameArea.canvas.height/2) + 55);
+	var youWinLabel = new label("You Win!", 108, fonts["primary"], myGameArea.canvas.width/2, (myGameArea.canvas.height/2) - 20);
+	var endTimeLabel = new label("Time: " + gameTimer.minutes + ":" + gameTimer.seconds + ":" + gameTimer.centiseconds, 36, fonts["primary"], myGameArea.canvas.width/2, (myGameArea.canvas.height/2) + 55);
 
 	youWinLabel.update();
 	endTimeLabel.update();

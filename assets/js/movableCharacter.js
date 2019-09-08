@@ -1,6 +1,5 @@
 class MovableCharacter {
 	constructor(width, height, color, x, y) {
-		this.gamearea = myGameArea;
 		this.width = width;
 		this.height = height;
 		this.color = color;
@@ -14,12 +13,6 @@ class MovableCharacter {
     update() {
         ctx = myGameArea.context;
 
-        // ctx.fillStyle = this.color;
-        // ctx.fillRect(this.x, this.y, this.width, this.height);
-//
-		// ctx.strokeStyle = "#000000";
-        // ctx.strokeRect(this.x, this.y, this.width, this.height);
-//
 		// THIS IS THE CATCH HELPER OUTLINE
         // ctx.strokeRect((this.x - 10), (this.y - 10), (this.width + 20), (this.height + 20));
 
