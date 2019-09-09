@@ -18,6 +18,7 @@
 & change name of this project, take old multiplayer notes and move them to the actual multiplayer project
 & use current settings with 10 elves for "hard mode"?
 & finish difficulties
+change "update" to "paint"
 
 # Optional
 # --------------------------------------

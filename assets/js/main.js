@@ -175,8 +175,8 @@ function label(text, fontSize, fontFamily, x, y) {
 function endGame() {
 	myGameArea.clear();
 
-	var youWinLabel = new label("You Win!", 108, fonts["primary"], myGameArea.canvas.width/2, (myGameArea.canvas.height/2) - 20);
-	var endTimeLabel = new label("Time: " + gameTimer.minutes + ":" + gameTimer.seconds + ":" + gameTimer.centiseconds, 36, fonts["primary"], myGameArea.canvas.width/2, (myGameArea.canvas.height/2) + 55);
+	var youWinLabel = new Label("You Win!", 108, fonts["primary"], myGameArea.canvas.width/2, (myGameArea.canvas.height/2) - 20);
+	var endTimeLabel = new Label("Time: " + gameTimer.minutes + ":" + gameTimer.seconds + ":" + gameTimer.centiseconds, 36, fonts["primary"], myGameArea.canvas.width/2, (myGameArea.canvas.height/2) + 55);
 
 	youWinLabel.update();
 	endTimeLabel.update();
