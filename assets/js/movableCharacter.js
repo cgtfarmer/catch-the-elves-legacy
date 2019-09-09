@@ -11,7 +11,7 @@ class MovableCharacter {
 	}
 
     update() {
-        ctx = myGameArea.context;
+        let ctx = myGameArea.context;
 
 		// THIS IS THE CATCH HELPER OUTLINE
         // ctx.strokeRect((this.x - 10), (this.y - 10), (this.width + 20), (this.height + 20));

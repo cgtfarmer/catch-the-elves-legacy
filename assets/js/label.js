@@ -8,7 +8,7 @@ class Label {
 	}
 
     update() {
-		ctx = myGameArea.context;
+		let ctx = myGameArea.context;
 		ctx.font = this.fontSize + "px " + this.fontFamily;
 		ctx.fillStyle = "#000000";
 		ctx.textAlign = "center";

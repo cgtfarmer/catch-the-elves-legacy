@@ -76,23 +76,23 @@ var myGameArea = {
     }
 }
 
-function catchCounter(fontSize, x, y) {
-    this.gamearea = myGameArea;
-	this.fontSize = fontSize;
-    this.x = x;
-    this.y = y;
-	this.text = "CAUGHT: " + (NUM_ELVES - elves.length) + "/" + NUM_ELVES;
-
-    this.update = function() {
-		ctx = myGameArea.context;
-		ctx.font = fontSize + "px " + fonts["primary"];
-		ctx.fillStyle = "#000000";
-		this.text = "CAUGHT: " + (NUM_ELVES - elves.length) + "/" + NUM_ELVES;
-		ctx.fillText(this.text, this.x, this.y);
-    }
-
-	return;
-}
+// function catchCounter(fontSize, x, y) {
+    // this.gamearea = myGameArea;
+	// this.fontSize = fontSize;
+    // this.x = x;
+    // this.y = y;
+	// this.text = "CAUGHT: " + (NUM_ELVES - elves.length) + "/" + NUM_ELVES;
+//
+    // this.update = function() {
+		// ctx = myGameArea.context;
+		// ctx.font = fontSize + "px " + fonts["primary"];
+		// ctx.fillStyle = "#000000";
+		// this.text = "CAUGHT: " + (NUM_ELVES - elves.length) + "/" + NUM_ELVES;
+		// ctx.fillText(this.text, this.x, this.y);
+    // }
+//
+	// return;
+// }
 
 function startGame(event, difficulty) {
 	event.preventDefault();
@@ -105,9 +105,14 @@ function startGame(event, difficulty) {
 	gameTimer = new timer(timerFontSize, (myGameArea.canvas.width - 190), (timerFontSize + 10));
 
 	let catchCounterFontSize = 20;
-	gameCatchCounter = new catchCounter(catchCounterFontSize, (myGameArea.canvas.width - 190), (catchCounterFontSize + 50));
+	gameCatchCounter = new Label(
+		"CAUGHT: " + (NUM_ELVES - elves.length) + "/" + NUM_ELVES,
+		catchCounterFontSize,
+		fonts["primary"],
+		(myGameArea.canvas.width - 190),
+		(catchCounterFontSize + 50)
+	);
 	gameCatchCounter.update();
-
 
 	var elfOptions = Object.keys(spriteSheetMap.entities).slice(1);
 	for(let i = 0; i < NUM_ELVES; i++) {
@@ -150,26 +155,11 @@ function updateGameArea() {
 	// if(myGameArea.frameNo == 1 || everyinterval(150)) {
 	myGameArea.frameNumber += 1;
     gameTimer.update();
+
+	gameCatchCounter.text = "CAUGHT: " + (NUM_ELVES - elves.length) + "/" + NUM_ELVES;
     gameCatchCounter.update();
 	// }
 	return;
-}
-
-function label(text, fontSize, fontFamily, x, y) {
-	this.text = text;
-	this.fontSize = fontSize;
-	this.fontFamily = fontFamily;
-	this.x = x;
-	this.y = y;
-
-    this.update = function() {
-		ctx = myGameArea.context;
-		ctx.font = this.fontSize + "px " + fontFamily;
-		ctx.fillStyle = "#000000";
-		ctx.textAlign = "center";
-		ctx.fillText(this.text, this.x, this.y);
-    }
-
 }
 
 function endGame() {
