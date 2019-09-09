@@ -15,6 +15,26 @@ class Player extends MovableCharacter {
 		return position;
 	}
 
+	updateSpeed() {
+		this.speedX = 0;
+		this.speedY = 0;
+		if(myGameArea.keys && myGameArea.keys[37]) {this.speedX = -2; }
+		if(myGameArea.keys && myGameArea.keys[39]) {this.speedX = 2; }
+		if(myGameArea.keys && myGameArea.keys[38]) {this.speedY = -2; }
+		if(myGameArea.keys && myGameArea.keys[40]) {this.speedY = 2; }
+		if(myGameArea.keys && myGameArea.keys[32]) {
+			if(!spaceHasBeenEvaluated) {
+				// console.log("Attempting catch");
+				this.attemptCatch();
+				spaceHasBeenEvaluated = true;
+			} else {
+				// console.log("Not attempting catch");
+			}
+		}
+
+		return;
+	}
+
 	attemptCatch() {
 		for(i = 0; i < elves.length; i++) {
 			var elf = elves[i];

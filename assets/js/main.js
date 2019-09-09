@@ -10,26 +10,29 @@ var spriteSheetMap = new SpriteSheetMap(
 	new SpriteSheet("assets/images/spriteSheet.png", 100, 100)
 );
 
-var elfSpeeds = { easy : 1,
-				  medium : 2,
-				  hard : 5,
-				  insane : 7,
-				  legendary : 11,
-				  impossible : 15 };
+var elfSpeeds = {
+	easy : 1,
+	medium : 2,
+	hard : 5,
+	insane : 7,
+	legendary : 11,
+	impossible : 15
+};
 
-var directionChangeRate = { easy : 150,
-							medium : 100,
-							hard : 50,
-							insane : 25,
-							legendary : 15,
-							impossible : 10 };
+var directionChangeRate = {
+	easy : 150,
+	medium : 100,
+	hard : 50,
+	insane : 25,
+	legendary : 15,
+	impossible : 10
+};
 
 var gameDifficulty;
 
 const NUM_ELVES = 10;
 
 var elves = [];
-var elfOptions = Object.keys(spriteSheetMap.entities).slice(1);
 
 var updateCount = 0;
 var spaceHasBeenEvaluated = false;
@@ -105,6 +108,8 @@ function startGame(event, difficulty) {
 	gameCatchCounter = new catchCounter(catchCounterFontSize, (myGameArea.canvas.width - 190), (catchCounterFontSize + 50));
 	gameCatchCounter.update();
 
+
+	var elfOptions = Object.keys(spriteSheetMap.entities).slice(1);
 	for(let i = 0; i < NUM_ELVES; i++) {
 		let x = getRndInteger(0, (myGameArea.canvas.width - Elf.width));
 		let y = getRndInteger(0, (myGameArea.canvas.height - Elf.height));
@@ -117,21 +122,7 @@ function startGame(event, difficulty) {
 function updateGameArea() {
     myGameArea.clear();
 
-    player1.speedX = 0;
-    player1.speedY = 0;
-    if(myGameArea.keys && myGameArea.keys[37]) {player1.speedX = -2; }
-    if(myGameArea.keys && myGameArea.keys[39]) {player1.speedX = 2; }
-    if(myGameArea.keys && myGameArea.keys[38]) {player1.speedY = -2; }
-    if(myGameArea.keys && myGameArea.keys[40]) {player1.speedY = 2; }
-    if(myGameArea.keys && myGameArea.keys[32]) {
-		if(!spaceHasBeenEvaluated) {
-			// console.log("Attempting catch");
-			player1.attemptCatch();
-			spaceHasBeenEvaluated = true;
-		} else {
-			// console.log("Not attempting catch");
-		}
-	}
+	player1.updateSpeed();
     player1.updatePosition();
     player1.update();
 
