@@ -1,18 +1,12 @@
-function timer(fontSize, x, y) {
-    this.gamearea = myGameArea;
-	this.fontSize = fontSize;
-    this.x = x;
-    this.y = y;
-	this.text = "TIME: 0";
-	this.centiseconds = 0;
-	this.seconds = 0;
-	this.minutes = 0;
+class Timer extends Label {
+	constructor(fontSize, fontFamily, x, y) {
+		super("TIME: 0", fontSize, fontFamily, "left", x, y);
+		this.centiseconds = 0;
+		this.seconds = 0;
+		this.minutes = 0;
+	}
 
-    this.update = function() {
-		ctx = myGameArea.context;
-		ctx.font = fontSize + "px Arial";
-		ctx.fillStyle = "#000000";
-
+    update() {
 		let clock = (myGameArea.frameNumber*2);
 		this.centiseconds = clock % 100;
 
@@ -27,9 +21,7 @@ function timer(fontSize, x, y) {
 		}
 
 		this.text = "TIME: " + this.minutes + ":" + this.seconds + ":" + this.centiseconds;
-		ctx.fillText(this.text, this.x, this.y);
+
+		super.update();
     }
-
-	return;
 }
-

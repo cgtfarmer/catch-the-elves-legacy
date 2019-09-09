@@ -102,13 +102,19 @@ function startGame(event, difficulty) {
     player1 = new Player("santa", (myGameArea.canvas.width/2), (myGameArea.canvas.height/2));
 
 	let timerFontSize = 28;
-	gameTimer = new timer(timerFontSize, (myGameArea.canvas.width - 190), (timerFontSize + 10));
+	gameTimer = new Timer(
+		timerFontSize,
+		fonts["primary"],
+		(myGameArea.canvas.width - 190),
+		(timerFontSize + 10)
+	);
 
 	let catchCounterFontSize = 20;
 	gameCatchCounter = new Label(
 		"CAUGHT: " + (NUM_ELVES - elves.length) + "/" + NUM_ELVES,
 		catchCounterFontSize,
 		fonts["primary"],
+		"left",
 		(myGameArea.canvas.width - 190),
 		(catchCounterFontSize + 50)
 	);
