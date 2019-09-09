@@ -20,6 +20,7 @@
 & finish difficulties
 & fix text-alignment on label thingy - don't force it on everything
 change "update" to "paint"
+fix interval stuff to more a more standard approach using those weird, random JS timer method thingies
 
 # Optional
 # --------------------------------------

@@ -1,3 +1,4 @@
+
 class Elf extends MovableCharacter {
 
 	constructor(color, x, y) {
@@ -18,13 +19,21 @@ class Elf extends MovableCharacter {
 	updateSpeed() {
 		this.speedX = 0;
 		this.speedY = 0;
-		this.speedX = getRndInteger((elfSpeeds[gameDifficulty]*-1),
-									elfSpeeds[gameDifficulty]);
-		this.speedY = getRndInteger((elfSpeeds[gameDifficulty]*-1),
-									elfSpeeds[gameDifficulty]);
+		this.speedX = getRndInteger((Elf.speeds[gameDifficulty] * -1),
+									Elf.speeds[gameDifficulty]);
+		this.speedY = getRndInteger((Elf.speeds[gameDifficulty] * -1),
+									Elf.speeds[gameDifficulty]);
 	}
 
 }
 
 Elf.width = 30;
 Elf.height = 30;
+Elf.speeds = {
+	easy : 1,
+	medium : 2,
+	hard : 5,
+	insane : 7,
+	legendary : 11,
+	impossible : 15
+};

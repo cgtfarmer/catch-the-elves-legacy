@@ -10,15 +10,6 @@ var spriteSheetMap = new SpriteSheetMap(
 	new SpriteSheet("assets/images/spriteSheet.png", 100, 100)
 );
 
-var elfSpeeds = {
-	easy : 1,
-	medium : 2,
-	hard : 5,
-	insane : 7,
-	legendary : 11,
-	impossible : 15
-};
-
 var directionChangeRate = {
 	easy : 150,
 	medium : 100,
@@ -36,7 +27,6 @@ var elves = [];
 
 var updateCount = 0;
 var spaceHasBeenEvaluated = false;
-var time = 0;
 
 // ===========================================================================
 // => END OF GLOBAL VARIABLES
@@ -75,24 +65,6 @@ var myGameArea = {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 }
-
-// function catchCounter(fontSize, x, y) {
-    // this.gamearea = myGameArea;
-	// this.fontSize = fontSize;
-    // this.x = x;
-    // this.y = y;
-	// this.text = "CAUGHT: " + (NUM_ELVES - elves.length) + "/" + NUM_ELVES;
-//
-    // this.update = function() {
-		// ctx = myGameArea.context;
-		// ctx.font = fontSize + "px " + fonts["primary"];
-		// ctx.fillStyle = "#000000";
-		// this.text = "CAUGHT: " + (NUM_ELVES - elves.length) + "/" + NUM_ELVES;
-		// ctx.fillText(this.text, this.x, this.y);
-    // }
-//
-	// return;
-// }
 
 function startGame(event, difficulty) {
 	event.preventDefault();
@@ -171,8 +143,8 @@ function updateGameArea() {
 function endGame() {
 	myGameArea.clear();
 
-	var youWinLabel = new Label("You Win!", 108, fonts["primary"], myGameArea.canvas.width/2, (myGameArea.canvas.height/2) - 20);
-	var endTimeLabel = new Label("Time: " + gameTimer.minutes + ":" + gameTimer.seconds + ":" + gameTimer.centiseconds, 36, fonts["primary"], myGameArea.canvas.width/2, (myGameArea.canvas.height/2) + 55);
+	var youWinLabel = new Label("You Win!", 108, fonts["primary"], "center", myGameArea.canvas.width/2, (myGameArea.canvas.height/2) - 20);
+	var endTimeLabel = new Label("Time: " + gameTimer.minutes + ":" + gameTimer.seconds + ":" + gameTimer.centiseconds, 36, fonts["primary"], "center", myGameArea.canvas.width/2, (myGameArea.canvas.height/2) + 55);
 
 	youWinLabel.update();
 	endTimeLabel.update();
@@ -181,13 +153,5 @@ function endGame() {
 
 function getRndInteger(min, max) {
 	return Math.floor(Math.random() * (max - min + 1) ) + min;
-}
-
-function convertSecondsToTimeStr(hundredthSeconds) {
-	// console.log(hundredthSeconds);
-	let seconds = hundredthSeconds/100;
-
-	let minutes = Math.floor(seconds/60);
-	return minutes + ":" + seconds;
 }
 
