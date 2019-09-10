@@ -1,6 +1,10 @@
 var player1;
 var gameTimer;
+var gameTimerInterval;
 var gameCatchCounter;
+
+var FRAMES_PER_SECOND = 50;
+var MILLISECONDS_PER_SECOND = 1000;
 
 var fonts = {"primary": "Arial"};
 
@@ -11,13 +15,21 @@ var spriteSheetMap = new SpriteSheetMap(
 );
 
 var directionChangeRate = {
-	easy : 150,
-	medium : 100,
-	hard : 50,
-	insane : 25,
-	legendary : 15,
-	impossible : 10
+	easy : 3000,
+	medium : 2000,
+	hard : 1000,
+	insane : 500,
+	legendary : 300,
+	impossible : 200
 };
+
+// old values
+// -       easy : 150,
+// -       medium : 100,
+// -       hard : 50,
+// -       insane : 25,
+// -       legendary : 15,
+// -       impossible : 10
 
 var gameDifficulty;
 
@@ -41,10 +53,14 @@ var myGameArea = {
         this.canvas.height = 400;
         this.context = this.canvas.getContext("2d");
 		this.frameNumber = 0;
+
+		clearInterval(this.elfSpeedChangeInterval);
+		this.elfSpeedChangeInterval = setInterval(updateElfSpeeds, directionChangeRate[gameDifficulty]);
+
 		if(this.interval == null) {
 
 			clearInterval(this.interval);
-			this.interval = setInterval(updateGameArea, 20);
+			this.interval = setInterval(updateGameArea, MILLISECONDS_PER_SECOND/FRAMES_PER_SECOND);
 
 			$("#page-grid").keydown(function(e) {
 				if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
@@ -68,9 +84,11 @@ var myGameArea = {
 
 function startGame(event, difficulty) {
 	event.preventDefault();
+
 	gameDifficulty = difficulty;
     myGameArea.start(); // disable?
 	$("#game-canvas").show();
+
     player1 = new Player("santa", (myGameArea.canvas.width/2), (myGameArea.canvas.height/2));
 
 	let timerFontSize = 28;
@@ -80,6 +98,15 @@ function startGame(event, difficulty) {
 		(myGameArea.canvas.width - 190),
 		(timerFontSize + 10)
 	);
+
+	clearInterval(gameTimerInterval);
+	gameTimerInterval = setInterval(
+		function() {
+			gameTimer.increment();
+		},
+		MILLISECONDS_PER_CENTISECOND
+	);
+	gameTimer.update();
 
 	let catchCounterFontSize = 20;
 	gameCatchCounter = new Label(
@@ -96,10 +123,12 @@ function startGame(event, difficulty) {
 	for(let i = 0; i < NUM_ELVES; i++) {
 		let x = getRndInteger(0, (myGameArea.canvas.width - Elf.width));
 		let y = getRndInteger(0, (myGameArea.canvas.height - Elf.height));
-		let color = elfOptions[getRndInteger(0, elfOptions.length - 1)];
-		elves[i] = new Elf(color, x, y);
+		let entity = elfOptions[getRndInteger(0, elfOptions.length - 1)];
+		elves[i] = new Elf(entity, x, y);
 	}
+	updateElfSpeeds();
 
+	return;
 }
 
 function updateGameArea() {
@@ -116,9 +145,9 @@ function updateGameArea() {
 
 	if(myGameArea.frameNumber % directionChangeRate[gameDifficulty] == 0 || myGameArea.frameNumber == 0) {
 
-		for(i = 0; i < elves.length; i++) {
-			elves[i].updateSpeed();
-		}
+		// for(let i = 0; i < elves.length; i++) {
+			// elves[i].updateSpeed();
+		// }
 
 		updateCount = 0;
 	}
@@ -140,7 +169,15 @@ function updateGameArea() {
 	return;
 }
 
+function updateElfSpeeds() {
+	for(let i = 0; i < elves.length; i++) {
+		elves[i].updateSpeed();
+	}
+	return;
+}
+
 function endGame() {
+	clearInterval(gameTimerInterval);
 	myGameArea.clear();
 
 	var youWinLabel = new Label("You Win!", 108, fonts["primary"], "center", myGameArea.canvas.width/2, (myGameArea.canvas.height/2) - 20);
