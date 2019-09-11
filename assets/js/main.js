@@ -23,39 +23,21 @@ var directionChangeRate = {
 	impossible : 200
 };
 
-// old values
-// -       easy : 150,
-// -       medium : 100,
-// -       hard : 50,
-// -       insane : 25,
-// -       legendary : 15,
-// -       impossible : 10
-
 var gameDifficulty;
 
 const NUM_ELVES = 10;
 
 var elves = [];
 
-var updateCount = 0;
 var spaceHasBeenEvaluated = false;
-
-// ===========================================================================
-// => END OF GLOBAL VARIABLES
-// ===========================================================================
 
 var myGameArea = {
 	keys : [],
-	frameNumber : 0,
 	canvas : $("#game-canvas")[0], // Notice: [0]
     start : function() {
         this.canvas.width = 800;
         this.canvas.height = 400;
         this.context = this.canvas.getContext("2d");
-		this.frameNumber = 0;
-
-		clearInterval(this.elfSpeedChangeInterval);
-		this.elfSpeedChangeInterval = setInterval(updateElfSpeeds, directionChangeRate[gameDifficulty]);
 
 		if(this.interval == null) {
 
@@ -76,9 +58,12 @@ var myGameArea = {
 			});
 
 		}
+
+		return;
     },
     clear : function(){
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		return;
     }
 }
 
@@ -86,7 +71,7 @@ function startGame(event, difficulty) {
 	event.preventDefault();
 
 	gameDifficulty = difficulty;
-    myGameArea.start(); // disable?
+    myGameArea.start();
 	$("#game-canvas").show();
 
     player1 = new Player("santa", (myGameArea.canvas.width/2), (myGameArea.canvas.height/2));
@@ -126,6 +111,12 @@ function startGame(event, difficulty) {
 		let entity = elfOptions[getRndInteger(0, elfOptions.length - 1)];
 		elves[i] = new Elf(entity, x, y);
 	}
+
+	clearInterval(this.elfSpeedChangeInterval);
+	this.elfSpeedChangeInterval = setInterval(
+		updateElfSpeeds,
+		directionChangeRate[gameDifficulty]
+	);
 	updateElfSpeeds();
 
 	return;
@@ -143,29 +134,15 @@ function updateGameArea() {
 		return;
 	}
 
-	if(myGameArea.frameNumber % directionChangeRate[gameDifficulty] == 0 || myGameArea.frameNumber == 0) {
-
-		// for(let i = 0; i < elves.length; i++) {
-			// elves[i].updateSpeed();
-		// }
-
-		updateCount = 0;
-	}
-
 	for(i = 0; i < elves.length; i++) {
 		elves[i].updatePosition();
 		elves[i].update();
 	}
 
-	updateCount++;
-
-	// if(myGameArea.frameNo == 1 || everyinterval(150)) {
-	myGameArea.frameNumber += 1;
     gameTimer.update();
 
 	gameCatchCounter.text = "CAUGHT: " + (NUM_ELVES - elves.length) + "/" + NUM_ELVES;
     gameCatchCounter.update();
-	// }
 	return;
 }
 
